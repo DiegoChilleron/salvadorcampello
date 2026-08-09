@@ -79,11 +79,17 @@ export const VideoCard = memo(function VideoCard({ video, size = 'medium' }: Vid
     }, [video.videoId]);
 
     /**
-     * La tarjeta es un `<article role="button">` y no un `<button>` de verdad
-     * porque su contenido (divs, un `<p>`) es contenido de flujo, que dentro de
+     * La tarjeta es un `<div role="button">` y no un `<button>` de verdad porque
+     * su contenido (divs, un `<p>`) es contenido de flujo, que dentro de
      * `<button>` es HTML inválido. Con el rol hay que reponer a mano lo que el
      * elemento nativo daba gratis: el foco (`tabIndex`) y la activación por
      * Enter y Espacio. Sin esto el catálogo entero era inalcanzable sin ratón.
+     *
+     * Tampoco es un `<article>`: ese elemento solo admite los roles de
+     * documento (`region`, `main`, `none`…), así que `role="button"` encima de
+     * él es una combinación inválida —`aria-allowed-role`, que es lo que
+     * PageSpeed marcaba— aunque el árbol de accesibilidad ya expusiera un botón.
+     * Un `<div>` no tiene rol implícito que contradecir.
      */
     const handleKeyDown = useCallback(
         (event: React.KeyboardEvent<HTMLElement>) => {
@@ -107,7 +113,7 @@ export const VideoCard = memo(function VideoCard({ video, size = 'medium' }: Vid
         SIZE_VARIANTS[size] || SIZE_VARIANTS.medium;
 
     return (
-        <article
+        <div
             className={`video-card group ${roundedClasses}`}
             role="button"
             tabIndex={0}
@@ -134,6 +140,6 @@ export const VideoCard = memo(function VideoCard({ video, size = 'medium' }: Vid
                 />
             </div>
             <p className={`videocard-text ${titleClasses}`}> {video.title} </p>
-        </article>
+        </div>
     );
 });

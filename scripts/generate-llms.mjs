@@ -41,8 +41,36 @@ function readRoutes() {
     return routes;
 }
 
+/**
+ * Idiomas distintos del principal, leídos de `src/i18n/routing.ts` por el mismo
+ * motivo que las rutas: no repetir aquí una lista que ya existe.
+ */
+function readOtherLocales() {
+    const src = fs.readFileSync(path.join(ROOT, 'src/i18n/routing.ts'), 'utf8');
+    const locales = src.match(/locales:\s*\[([^\]]*)\]/);
+    const defaultLocale = src.match(/defaultLocale:\s*'([^']*)'/);
+
+    if (!locales || !defaultLocale) {
+        throw new Error('generate-llms: no se pudieron leer los idiomas de src/i18n/routing.ts');
+    }
+
+    return [...locales[1].matchAll(/'([^']+)'/g)]
+        .map(([, locale]) => locale)
+        .filter((locale) => locale !== defaultLocale[1]);
+}
+
 /** URL absoluta con barra final (`trailingSlash: true`). */
 const url = (p) => `${BASE}${p === '/' ? '/' : `${p}/`}`;
+
+/**
+ * Enlace Markdown. El formato de llmstxt.org pide listas de enlaces, no URLs
+ * sueltas: con las URLs en crudo el fichero se valida como «sin ningún enlace»
+ * (lo detecta PageSpeed) porque nada en él es sintaxis de enlace.
+ *
+ * Los corchetes del texto se escapan: hay títulos de vídeo que los llevan y
+ * partirían el enlace por la mitad.
+ */
+const link = (text, href) => `[${String(text).replace(/([[\]])/g, '\\$1')}](${href})`;
 
 const CATEGORIES = [
     ['telenit', portfolio.subtitle1, portfolio.description1],
@@ -60,6 +88,7 @@ function readCategory(id) {
 }
 
 const routes = readRoutes();
+const OTHER_LOCALES = readOtherLocales();
 const lines = [];
 const push = (...l) => lines.push(...l);
 
@@ -84,7 +113,8 @@ push(
 push('');
 push('**¿Dónde ver su trabajo?**');
 push(
-    `El portfolio multimedia reúne sus informativos, entrevistas y retransmisiones: ${url(routes.portfolio)}`
+    `El ${link('portfolio multimedia', url(routes.portfolio))} reúne sus informativos, ` +
+    'entrevistas y retransmisiones.'
 );
 push('');
 
@@ -118,7 +148,10 @@ push('');
 // ── Portfolio ────────────────────────────────────────────────────────────────
 push('## Portfolio multimedia');
 push('');
-push(`Vídeos publicados en YouTube, agrupados en tres secciones: ${url(routes.portfolio)}`);
+push(
+    `Vídeos publicados en YouTube, agrupados en tres secciones: ` +
+    `${link('ver el portfolio completo', url(routes.portfolio))}.`
+);
 push('');
 
 for (const [id, name, description] of CATEGORIES) {
@@ -131,7 +164,7 @@ for (const [id, name, description] of CATEGORIES) {
     if (videos.length > 0) {
         push('Ejemplos recientes:');
         for (const video of videos.slice(0, 10)) {
-            push(`- ${video.title} — https://www.youtube.com/watch?v=${video.videoId}`);
+            push(`- ${link(video.title, `https://www.youtube.com/watch?v=${video.videoId}`)}`);
         }
         push('');
     }
@@ -140,17 +173,24 @@ for (const [id, name, description] of CATEGORIES) {
 // ── Páginas ──────────────────────────────────────────────────────────────────
 push('## Páginas');
 push('');
-push(`- Inicio: ${url(routes.home)}`);
-push(`- Portfolio multimedia: ${url(routes.portfolio)}`);
+push(`- ${link('Inicio', url(routes.home))}: biografía, trayectoria y contacto.`);
+push(
+    `- ${link('Portfolio multimedia', url(routes.portfolio))}: catálogo completo de ` +
+    'informativos, entrevistas y eventos.'
+);
 push('');
-push('Versiones en otros idiomas: /en/, /ca/, /it/');
+push(
+    'Versiones en otros idiomas: ' +
+    OTHER_LOCALES.map((locale) => link(locale.toUpperCase(), `${BASE}/${locale}/`)).join(', ') +
+    '.'
+);
 push('');
 
 push('## Legal');
 push('');
-push(`- Aviso legal: ${url(routes.legalNotice)}`);
-push(`- Política de privacidad: ${url(routes.privacyPolicy)}`);
-push(`- Política de cookies: ${url(routes.cookiesPolicy)}`);
+push(`- ${link('Aviso legal', url(routes.legalNotice))}`);
+push(`- ${link('Política de privacidad', url(routes.privacyPolicy))}`);
+push(`- ${link('Política de cookies', url(routes.cookiesPolicy))}`);
 push('');
 
 fs.writeFileSync(OUT, lines.join('\n'), 'utf8');
