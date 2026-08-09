@@ -1,0 +1,209 @@
+{
+    "Navbar": {
+        "section1": "Inicio",
+        "section2": "CV",
+        "section3": "Portfolio",
+        "section4": "Contacto",
+        "mainNav": "Navegación principal",
+        "toggleMenu": "Abrir o cerrar el menú"
+    },
+    "Hero": {
+        "description": {
+            "paragraph1": "Soy Salvador Campello, <em>periodista</em> y director de TeleElx, donde lidero la estrategia editorial y coordino la cobertura informativa de la actualidad local con rigor, contexto y proximidad.",
+            "paragraph2": "Además, soy <em>profesor</em> en el área de Comunicación Audiovisual de la Universidad Miguel Hernández, donde imparto asignaturas sobre producción, realización, tecnología y narrativa multiplataforma.",
+            "paragraph3": "Mi trayectoria televisiva como <em>presentador</em> me ha permitido especializarme en la realización y conducción en directo, la coordinación de equipos y el diseño estratégico de contenidos audiovisuales."
+        }
+    },
+    "Curriculum": {
+        "title": "Curriculum",
+        "section1": "Experiencia",
+        "expblock1": {
+            "company": "TeleElx",
+            "job1": "Director general",
+            "date1": "Desde 2021",
+            "description1": "Responsable de la coordinación de los diferentes departamentos, la definición de estrategias de crecimiento y la digitalización de la empresa.",
+            "job2": "Editor de Informativos",
+            "date2": "Desde 2018",
+            "description2": "Encargado de la edición y supervisión de los informativos diarios, así como de la coordinación de equipos y la gestión de contenidos.",
+            "job3": "Presentador",
+            "date3": "Desde 2014",
+            "description3": "Presentador de informativos, especiales y retransmisiones en directo de eventos relevantes de la ciudad.",
+            "job4": "Redactor",
+            "date4": "Desde 2012",
+            "description4": "Elaboración de noticias, reportajes y contenidos audiovisuales para informativos y programas de la cadena."
+        },
+        "expblock2": {
+            "company": "TARSA",
+            "job": "Redactor en prácticas",
+            "date": "verano 2012",
+            "description": "Apoyo en la redacción de contenidos corporativos, notas de prensa y campañas de comunicación."
+        },
+        "expblock3": {
+            "company": "COPE Elche",
+            "job": "Redactor en prácticas",
+            "date": "verano 2011",
+            "description": "Colaboración en la redacción de informativos locales ejerciendo funciones de producción y locución."
+        },
+        "expblock4": {
+            "company": "Radio UMH",
+            "job": "Locutor",
+            "date": "2008-2012",
+            "description": "Producción, redacción y locución de programas en la emisora universitaria. Premio al mejor programa de radio elaborado por un alumno."
+        },
+        "expblock5": {
+            "company": "Punto Radio Elche",
+            "job": "Redactor en prácticas",
+            "date": "verano 2007",
+            "description": "Participación en la producción de programas y apoyo en la elaboración de contenidos informativos."
+        },
+        "expblock6": {
+            "company": "Radio Jove Elx",
+            "job": "Locutor",
+            "date": "2004 - 2008",
+            "description": "Primera experiencia en medios como locutor y colaborador en programas juveniles, desarrollando habilidades en comunicación y producción radiofónica."
+        },
+        "section2": "Formación",
+        "formblock1": {
+            "university": "Universidad Miguel Hernández de Elche",
+            "title": "Máster en Innovación en Periodismo",
+            "date": "2014 - 2015",
+            "description": "Especialización en nuevos formatos, narrativas digitales y estrategias de comunicación multimedia."
+        },
+        "formblock2": {
+            "university": "Universidad Miguel Hernández de Elche",
+            "title": "Licenciatura en Periodismo",
+            "date": "2007 - 2012",
+            "description": "Formación en redacción, producción y gestión de contenidos en medios audiovisuales, radio, prensa y televisión."
+        },
+        "formblock3": {
+            "university": "Alma Mater Studiorum - Università di Bologna",
+            "title": "Programa Erasmus",
+            "date": "2009 - 2010",
+            "description": "Estancia académica centrada en comunicación, periodismo y análisis de medios, que permitió adquirir una visión internacional del sector."
+        },
+        "formblock4": {
+            "university": "Atresmedia Formación",
+            "title": "Edición y Presentación de Informativos",
+            "date": "2019",
+            "description": "Curso especializado en la producción, redacción y presentación de informativos en televisión."
+        },
+        "pdfdownload": "Descargar CV en PDF",
+        "clipboardcopy": "Copiar al portapapeles",
+        "clipboardcopied": "¡Copiado!",
+        "clipboardbiography": "Salvador Campello Iborra es periodista, comunicador y profesor universitario. Su vinculación con los medios comenzó muy temprano: a los 14 años inició su trayectoria en la radio local, una pasión que marcaría su carrera profesional. Durante su etapa universitaria obtuvo el premio al mejor programa de radio elaborado por un alumno en la emisora de la Universidad Miguel Hernández, reconocimiento que consolidó su compromiso con la comunicación de calidad.\n\nEs licenciado en Periodismo por la Universidad Miguel Hernández, donde también cursó un Máster en Innovación en Periodismo, ampliando su especialización en el desarrollo de nuevos formatos y narrativas audiovisuales. Además, realizó el Erasmus en Italia, y una estancia en Nueva York, experiencias que enriquecieron su visión internacional y su enfoque hacia la comunicación y los medios.\n\nA pesar de su juventud, Salvador ha construido una sólida trayectoria que lo ha llevado a ser director de TeleElx, la televisión local de referencia en la ciudad. Además, es presentador de informativos y retransmisiones especiales en directo, convirtiendo su voz y su estilo en un referente para la audiencia ilicitana.\n\nCompagina esta labor con la docencia en la Universidad Miguel Hernández, donde imparte asignaturas de radio, televisión, tecnología audiovisual y producción de contenidos, formando a futuros periodistas y comunicadores. Es también miembro de la Cátedra Institucional Misteri d'Elx, desde la que contribuye a la difusión y preservación de uno de los principales patrimonios culturales de la ciudad.\n\nA lo largo de su carrera, ha participado en diversos proyectos vinculados a la innovación audiovisual, impulsando nuevas formas de informar y conectar con la ciudadanía. Su perfil combina formación, experiencia, versatilidad y compromiso con Elche y su entorno, destacando como una de las voces más reconocibles y respetadas del panorama mediático local."
+    },
+    "PortfolioMultimedia": {
+        "title": "Portfolio multimedia",
+        "subtitle1": "telenit",
+        "description1": "Informativo nocturno de la actualidad de la ciudad de Elche con los acontecimientos más relevantes de la jornada y las últimas noticias. De lunes a viernes",
+        "subtitle2": "entrevistas",
+        "description2": "Entrevistas a personajes relevantes de la actualidad local, abordando temas de interés general.",
+        "subtitle3": "eventos",
+        "description3": "Cobertura de eventos culturales, sociales y deportivos en la ciudad de Elche.",
+        "subtitle4": "artículos",
+        "description4": "Artículos de opinión y reportajes sobre temas de actualidad y cultura en Elche."
+    },
+    "ListSection": {
+        "button": {
+            "telenit": "Ver más vídeos de TeleNit",
+            "entrevistas": "Ver más vídeos de entrevistas",
+            "eventos": "Ver más vídeos de eventos",
+            "articulos": "Ver más artículos"
+        },
+        "loading": "Cargando vídeos...",
+        "error": "No se pudieron cargar los vídeos.",
+        "viewAll": "Ver todos los vídeos de {title}"
+    },
+    "PortfolioPage": {
+        "title": "Portfolio multimedia",
+        "description": "Recopilación de vídeos informativos, entrevistas y retransmisiones en directo",
+        "backbutton": "Volver a inicio",
+        "search": {
+            "title": "Buscar vídeos",
+            "placeholder": "Buscar vídeos...",
+            "loading": "Cargando vídeos...",
+            "dontfind": "No se encontraron vídeos que coincidan con la búsqueda.",
+            "empty": "Todavía no hay vídeos en esta categoría."
+        },
+        "loadmore": "Cargar {count} más",
+        "category": {
+            "1": "Telenit",
+            "2": "Entrevistas",
+            "3": "Eventos"
+        },
+        "metaDescription": "Todos los vídeos de Salvador Campello: informativos TELENIT, entrevistas a personajes de la actualidad de Elche y retransmisiones en directo de eventos.",
+        "error": "No se pudieron cargar los vídeos. Inténtalo más tarde.",
+        "scrolltop": "Volver arriba",
+        "sizetoggle": "Cambiar el tamaño de las tarjetas",
+        "size": {
+            "big": "Vista grande",
+            "medium": "Vista mediana",
+            "small": "Vista pequeña"
+        }
+    },
+    "VideoCard": {
+        "play": "Reproducir vídeo: {title}"
+    },
+    "DialogYoutube": {
+        "title": "Vídeo de YouTube",
+        "close": "Cerrar",
+        "closelabel": "Cerrar vídeo"
+    },
+    "Contact": {
+        "title": "CONTACTO",
+        "subtitle": "¿Quieres ponerte en contacto?"
+    },
+    "SocialNetworks": {
+        "telephone": "Teléfono",
+        "mail": "Correo"
+    },
+    "Footer": {
+        "legalnotice": "Aviso Legal",
+        "privacitypolicy": "Política de Privacidad",
+        "cookiespolicy": "Política de Cookies",
+        "changelanguage": "Cambiar idioma"
+    },
+    "Metadata": {
+        "description": "Salvador Campello, periodista ilicitano, director general de TeleElx y profesor en la UMH. Informativos, entrevistas y retransmisiones en directo desde Elche.",
+        "shortDescription": "Periodista ilicitano",
+        "imageAlt": "Salvador Campello - Periodista ilicitano",
+        "title": "Salvador Campello | Periodista y director de TeleElx"
+    },
+    "Schema": {
+        "websiteDescription": "Web oficial de Salvador Campello, periodista y Director General en TeleElx.",
+        "personDescription": "Periodista y Director General en TeleElx. Experto en comunicación, medios audiovisuales y televisión local en Elche.",
+        "jobTitle": "Director General en TeleElx",
+        "contactType": "Contacto profesional",
+        "birthPlace": "Elche, España",
+        "country": "España",
+        "knowsAbout": {
+            "0": "Periodismo",
+            "1": "Comunicación",
+            "2": "Medios audiovisuales",
+            "3": "Televisión local",
+            "4": "Cultura en Elche"
+        },
+        "alumniOf": "Universidad Miguel Hernández de Elche"
+    },
+    "NotFound": {
+        "title": "Señal no encontrada",
+        "subtitle": "Este canal no está disponible en su programación",
+        "description": "La página que busca puede haber sido eliminada, cambió de nombre o está temporalmente no disponible.",
+        "button": "Volver al Inicio"
+    },
+    "Og": {
+        "homeEyebrow": "Periodista",
+        "portfolioEyebrow": "Portfolio",
+        "legalEyebrow": "Información legal"
+    },
+    "Gallery": {
+        "0": "Salvador Campello presentando el informativo de TeleElx en plató",
+        "1": "Salvador Campello durante una entrevista en el plató de TeleElx",
+        "2": "Salvador Campello en una retransmisión en directo desde Elche",
+        "3": "Salvador Campello con el equipo de redacción de TeleElx",
+        "4": "Salvador Campello cubriendo un acto institucional en Elche",
+        "5": "Salvador Campello ante las cámaras durante una grabación",
+        "6": "Salvador Campello en la mesa del informativo TELENIT",
+        "7": "Salvador Campello en un evento cultural de la ciudad de Elche"
+    }
+}

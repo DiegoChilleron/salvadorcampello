@@ -1,0 +1,209 @@
+{
+    "Navbar": {
+        "section1": "Inici",
+        "section2": "CV",
+        "section3": "Portfolio",
+        "section4": "Contacte",
+        "mainNav": "Navegació principal",
+        "toggleMenu": "Obrir o tancar el menú"
+    },
+    "Hero": {
+        "description": {
+            "paragraph1": "Sóc Salvador Campello, <em>periodista</em> i director de TeleElx, on lidero l'estratègia editorial i coordine una cobertura informativa rigorosa, contextual i propera.",
+            "paragraph2": "A més, sóc <em>professor</em> a l'àrea de Comunicació Audiovisual de la Universitat Miguel Hernández, on impartisc assignatures sobre producció, realització, tecnologia i narrativa multiplataforma.",
+            "paragraph3": "La meua trajectòria televisiva com a <em>presentador</em> m'ha permés especialitzar-me en la realització i conducció en directe, la coordinació d'equips i el disseny estratègic de continguts audiovisuals."
+        }
+    },
+    "Curriculum": {
+        "title": "Currículum",
+        "section1": "Experiència",
+        "expblock1": {
+            "company": "TeleElx",
+            "job1": "Director general",
+            "date1": "Des de 2021",
+            "description1": "Responsable de la coordinació dels diferents departaments, la definició d'estratègies de creixement i la digitalització de l'empresa.",
+            "job2": "Editor d'informatius",
+            "date2": "Des de 2018",
+            "description2": "Encarregat de l'edició i supervisió dels informatius diaris, així com de la coordinació d'equips i la gestió de continguts.",
+            "job3": "Presentador",
+            "date3": "Des de 2014",
+            "description3": "Presentador d'informatius, especials i retransmissions en directe d'esdeveniments rellevants de la ciutat.",
+            "job4": "Redactor",
+            "date4": "Des de 2012",
+            "description4": "Elaboració de notícies, reportatges i continguts audiovisuals per a informatius i programes."
+        },
+        "expblock2": {
+            "company": "TARSA",
+            "job": "Redactor en pràctiques",
+            "date": "Estiu 2012",
+            "description": "Suport en la redacció de continguts corporatius, notes de premsa i campanyes de comunicació."
+        },
+        "expblock3": {
+            "company": "COPE Elche",
+            "job": "Redactor en pràctiques",
+            "date": "Estiu 2011",
+            "description": "Col·laboració en la redacció d'informatius locals amb tasques de producció i locució."
+        },
+        "expblock4": {
+            "company": "Radio UMH",
+            "job": "Locutor",
+            "date": "2008-2012",
+            "description": "Producció, redacció i locució de programes a l'emissora universitària. Premi al millor programa de ràdio elaborat per un alumne."
+        },
+        "expblock5": {
+            "company": "Punto Radio Elche",
+            "job": "Redactor en pràctiques",
+            "date": "Estiu 2007",
+            "description": "Participació en la producció de programes i suport en l'elaboració de continguts informatius."
+        },
+        "expblock6": {
+            "company": "Radio Jove Elx",
+            "job": "Locutor",
+            "date": "2004 - 2008",
+            "description": "Primera experiència en mitjans com a locutor i col·laborador en programes juvenils, desenvolupant habilitats en comunicació i producció radiofònica."
+        },
+        "section2": "Formació",
+        "formblock1": {
+            "university": "Universitat Miguel Hernández d'Elx",
+            "title": "Màster en Innovació en Periodisme",
+            "date": "2014 - 2015",
+            "description": "Especialització en nous formats, narratives digitals i estratègies de comunicació multimèdia."
+        },
+        "formblock2": {
+            "university": "Universitat Miguel Hernández d'Elx",
+            "title": "Llicenciatura en Periodisme",
+            "date": "2007 - 2012",
+            "description": "Formació en redacció, producció i gestió de continguts en mitjans audiovisuals, ràdio, premsa i televisió."
+        },
+        "formblock3": {
+            "university": "Alma Mater Studiorum - Università di Bologna",
+            "title": "Programa Erasmus",
+            "date": "2009 - 2010",
+            "description": "Estada acadèmica centrada en comunicació, periodisme i anàlisi de mitjans, que va aportar una visió internacional del sector."
+        },
+        "formblock4": {
+            "university": "Atresmedia Formación",
+            "title": "Edició i Presentació d'Informatius",
+            "date": "2019",
+            "description": "Curs especialitzat en producció, redacció i presentació d'informatius de televisió."
+        },
+        "pdfdownload": "Descarregar CV en PDF",
+        "clipboardcopy": "Copiar al porta-retalls",
+        "clipboardcopied": "Copiat!",
+        "clipboardbiography": "Salvador Campello Iborra és periodista, comunicador i professor universitari. El seu vincle amb els mitjans va començar molt prompte: als 14 anys va iniciar la seua trajectòria a la ràdio local, una passió que marcaria la seua carrera professional. Durant la seua etapa universitària va obtindre el premi al millor programa de ràdio elaborat per un alumne a l'emissora de la Universitat Miguel Hernández, reconeixement que va consolidar el seu compromís amb una comunicació de qualitat.\n\nÉs llicenciat en Periodisme per la Universitat Miguel Hernández, on també va cursar un Màster en Innovació en Periodisme, ampliant la seua especialització en el desenvolupament de nous formats i narratives audiovisuals. A més, va realitzar l'Erasmus a Itàlia i una estada a Nova York, experiències que van enriquir la seua visió internacional i el seu enfocament cap a la comunicació i els mitjans.\n\nMalgrat la seua joventut, Salvador ha construït una sòlida trajectòria que l'ha portat a ser director de TeleElx, la televisió local de referència a la ciutat. A més, és presentador d'informatius i retransmissions especials en directe, convertint la seua veu i estil en un referent per a l'audiència il·licitana.\n\nCompagina aquesta labor amb la docència a la Universitat Miguel Hernández, on impartix assignatures de ràdio, televisió, tecnologia audiovisual i producció de continguts, formant futurs periodistes i comunicadors. També és membre de la Càtedra Institucional Misteri d'Elx, des d'on contribueix a la difusió i preservació d'un dels principals patrimonis culturals de la ciutat.\n\nAl llarg de la seua carrera, ha participat en diversos projectes vinculats a la innovació audiovisual, impulsant noves formes d'informar i connectar amb la ciutadania. El seu perfil combina formació, experiència, versatilitat i compromís amb Elx i el seu entorn, destacant com una de les veus més reconeixibles i respectades del panorama mediàtic local."
+    },
+    "PortfolioMultimedia": {
+        "title": "Portfolio multimèdia",
+        "subtitle1": "telenit",
+        "description1": "Informatiu nocturn de l'actualitat d'Elx amb les notícies més rellevants de la jornada i les últimes actualitzacions. De dilluns a divendres.",
+        "subtitle2": "entrevistes",
+        "description2": "Entrevistes a persones rellevants de l'actualitat local, abordant temes d'interés general.",
+        "subtitle3": "esdeveniments",
+        "description3": "Cobertura d'esdeveniments culturals, socials i esportius a la ciutat d'Elx.",
+        "subtitle4": "articles",
+        "description4": "Articles d'opinió i reportatges sobre actualitat i cultura a Elx."
+    },
+    "ListSection": {
+        "button": {
+            "telenit": "Veure més vídeos de TeleNit",
+            "entrevistas": "Veure més vídeos d'entrevistes",
+            "eventos": "Veure més vídeos d'esdeveniments",
+            "articulos": "Veure més articles"
+        },
+        "loading": "Carregant vídeos...",
+        "error": "No s'han pogut carregar els vídeos.",
+        "viewAll": "Veure tots els vídeos de {title}"
+    },
+    "PortfolioPage": {
+        "title": "Portfolio multimèdia",
+        "description": "Recopilació de vídeos informatius, entrevistes i retransmissions en directe",
+        "backbutton": "Tornar a l'inici",
+        "search": {
+            "title": "Buscar vídeos",
+            "placeholder": "Buscar vídeos...",
+            "loading": "Carregant vídeos...",
+            "dontfind": "No s'han trobat vídeos que coincidisquen amb la cerca.",
+            "empty": "Encara no hi ha vídeos en aquesta categoria."
+        },
+        "loadmore": "Carregar {count} més",
+        "category": {
+            "1": "Telenit",
+            "2": "Entrevistes",
+            "3": "Esdeveniments"
+        },
+        "metaDescription": "Tots els vídeos de Salvador Campello: informatius TELENIT, entrevistes a personatges de l’actualitat d’Elx i retransmissions en directe d’esdeveniments.",
+        "error": "No s'han pogut carregar els vídeos. Torna-ho a provar més tard.",
+        "scrolltop": "Tornar amunt",
+        "sizetoggle": "Canviar la mida de les targetes",
+        "size": {
+            "big": "Vista gran",
+            "medium": "Vista mitjana",
+            "small": "Vista xicoteta"
+        }
+    },
+    "VideoCard": {
+        "play": "Reproduir vídeo: {title}"
+    },
+    "DialogYoutube": {
+        "title": "Vídeo de YouTube",
+        "close": "Tancar",
+        "closelabel": "Tancar vídeo"
+    },
+    "Contact": {
+        "title": "CONTACTE",
+        "subtitle": "Vols posar-te en contacte?"
+    },
+    "SocialNetworks": {
+        "telephone": "Telèfon",
+        "mail": "Correu"
+    },
+    "Footer": {
+        "legalnotice": "Avís legal",
+        "privacitypolicy": "Política de privacitat",
+        "cookiespolicy": "Política de cookies",
+        "changelanguage": "Canviar d'idioma"
+    },
+    "Metadata": {
+        "description": "Salvador Campello, periodista il·licità, director general de TeleElx i professor a la UMH. Informatius, entrevistes i retransmissions en directe des d’Elx.",
+        "shortDescription": "Periodista il·licità",
+        "imageAlt": "Salvador Campello - Periodista il·licità",
+        "title": "Salvador Campello | Periodista i director de TeleElx"
+    },
+    "Schema": {
+        "websiteDescription": "Web oficial de Salvador Campello, periodista i Director General a TeleElx.",
+        "personDescription": "Periodista i Director General a TeleElx. Expert en comunicació, mitjans audiovisuals i televisió local a Elx.",
+        "jobTitle": "Director General a TeleElx",
+        "contactType": "Contacte professional",
+        "birthPlace": "Elx, Espanya",
+        "country": "Espanya",
+        "knowsAbout": {
+            "0": "Periodisme",
+            "1": "Comunicació",
+            "2": "Mitjans audiovisuals",
+            "3": "Televisió local",
+            "4": "Cultura a Elx"
+        },
+        "alumniOf": "Universitat Miguel Hernández d’Elx"
+    },
+    "NotFound": {
+        "title": "Senyal no trobat",
+        "subtitle": "Aquest canal no està disponible en la seua programació",
+        "description": "La pàgina que busques pot haver estat eliminada, haver canviat de nom o estar temporalment no disponible.",
+        "button": "Tornar a l'inici"
+    },
+    "Og": {
+        "homeEyebrow": "Periodista",
+        "portfolioEyebrow": "Portfolio",
+        "legalEyebrow": "Informació legal"
+    },
+    "Gallery": {
+        "0": "Salvador Campello presentant l’informatiu de TeleElx al plató",
+        "1": "Salvador Campello durant una entrevista al plató de TeleElx",
+        "2": "Salvador Campello en una retransmissió en directe des d’Elx",
+        "3": "Salvador Campello amb l’equip de redacció de TeleElx",
+        "4": "Salvador Campello cobrint un acte institucional a Elx",
+        "5": "Salvador Campello davant les càmeres durant un enregistrament",
+        "6": "Salvador Campello a la taula de l’informatiu TELENIT",
+        "7": "Salvador Campello en un esdeveniment cultural de la ciutat d’Elx"
+    }
+}

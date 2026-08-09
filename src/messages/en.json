@@ -1,0 +1,209 @@
+{
+    "Navbar": {
+        "section1": "Home",
+        "section2": "CV",
+        "section3": "Portfolio",
+        "section4": "Contact",
+        "mainNav": "Main navigation",
+        "toggleMenu": "Open or close the menu"
+    },
+    "Hero": {
+        "description": {
+            "paragraph1": "I'm Salvador Campello, <em>journalist</em> and director of TeleElx, where I lead the editorial strategy and coordinate rigorous, contextual and local news coverage.",
+            "paragraph2": "I'm also a <em>lecturer</em> in the Audiovisual Communication area at the Miguel Hernández University, teaching subjects on production, directing, technology and multiplatform storytelling.",
+            "paragraph3": "My TV career as a <em>presenter</em> has allowed me to specialise in live directing and anchoring, team coordination and strategic design of audiovisual content."
+        }
+    },
+    "Curriculum": {
+        "title": "Curriculum",
+        "section1": "Experience",
+        "expblock1": {
+            "company": "TeleElx",
+            "job1": "General Manager",
+            "date1": "Since 2021",
+            "description1": "Responsible for coordinating departments, defining growth strategies and driving the company's digital transformation.",
+            "job2": "News Editor",
+            "date2": "Since 2018",
+            "description2": "In charge of editing and supervising daily newscasts, coordinating teams and managing content.",
+            "job3": "Presenter",
+            "date3": "Since 2014",
+            "description3": "Presenter of newscasts, specials and live broadcasts of key local events.",
+            "job4": "Reporter",
+            "date4": "Since 2012",
+            "description4": "Production of news stories, reports and audiovisual content for newscasts and programmes."
+        },
+        "expblock2": {
+            "company": "TARSA",
+            "job": "Editorial Intern",
+            "date": "Summer 2012",
+            "description": "Support in drafting corporate content, press releases and communication campaigns."
+        },
+        "expblock3": {
+            "company": "COPE Elche",
+            "job": "Editorial Intern",
+            "date": "Summer 2011",
+            "description": "Collaboration in producing local newscasts, production tasks and voicing."
+        },
+        "expblock4": {
+            "company": "Radio UMH",
+            "job": "Host",
+            "date": "2008-2012",
+            "description": "Production, writing and hosting of programmes at the university station. Award for best student-produced radio show."
+        },
+        "expblock5": {
+            "company": "Punto Radio Elche",
+            "job": "Editorial Intern",
+            "date": "Summer 2007",
+            "description": "Participation in programme production and support in creating news content."
+        },
+        "expblock6": {
+            "company": "Radio Jove Elx",
+            "job": "Host",
+            "date": "2004 - 2008",
+            "description": "First media experience as a host and contributor on youth programmes, developing communication and radio production skills."
+        },
+        "section2": "Education",
+        "formblock1": {
+            "university": "Miguel Hernández University of Elche",
+            "title": "Master's in Journalism Innovation",
+            "date": "2014 - 2015",
+            "description": "Specialisation in new formats, digital narratives and multimedia communication strategies."
+        },
+        "formblock2": {
+            "university": "Miguel Hernández University of Elche",
+            "title": "Bachelor's in Journalism",
+            "date": "2007 - 2012",
+            "description": "Training in writing, production and content management across audiovisual media, radio, press and television."
+        },
+        "formblock3": {
+            "university": "Alma Mater Studiorum - University of Bologna",
+            "title": "Erasmus Programme",
+            "date": "2009 - 2010",
+            "description": "Academic stay focused on communication, journalism and media analysis, providing an international outlook."
+        },
+        "formblock4": {
+            "university": "Atresmedia Formación",
+            "title": "News Editing and Presenting",
+            "date": "2019",
+            "description": "Specialised course in production, writing and presenting TV news."
+        },
+        "pdfdownload": "Download CV (PDF)",
+        "clipboardcopy": "Copy to clipboard",
+        "clipboardcopied": "Copied!",
+        "clipboardbiography": "Salvador Campello Iborra is a journalist, communicator and university lecturer. His link with the media began very early: at the age of 14 he started his career in local radio, a passion that would shape his professional path. During his university years he received the award for the best student-produced radio show at the Miguel Hernández University station, a recognition that consolidated his commitment to quality communication.\n\nHe holds a degree in Journalism from the Miguel Hernández University, where he also completed a Master's in Journalism Innovation, expanding his specialisation in the development of new formats and audiovisual narratives. In addition, he undertook an Erasmus stay in Italy and a period in New York, experiences that enriched his international vision and approach to communication and media.\n\nDespite his youth, Salvador has built a solid career that has led him to become director of TeleElx, the city's leading local television. He is also a presenter of news programmes and special live broadcasts, making his voice and style a reference for the Elche audience.\n\nHe combines this role with teaching at the Miguel Hernández University, where he teaches radio, television, audiovisual technology and content production, training future journalists and communicators. He is also a member of the Misteri d'Elx Institutional Chair, contributing to the dissemination and preservation of one of the city's main cultural heritages.\n\nThroughout his career, he has participated in various projects linked to audiovisual innovation, promoting new ways of informing and connecting with citizens. His profile combines training, experience, versatility and commitment to Elche and its environment, standing out as one of the most recognisable and respected voices in the local media landscape."
+    },
+    "PortfolioMultimedia": {
+        "title": "Multimedia portfolio",
+        "subtitle1": "telenit",
+        "description1": "Nightly news programme covering Elche's current affairs with the day's most relevant stories and the latest updates. Monday to Friday.",
+        "subtitle2": "interviews",
+        "description2": "Interviews with relevant figures from local current affairs, addressing topics of general interest.",
+        "subtitle3": "events",
+        "description3": "Coverage of cultural, social and sporting events in the city of Elche.",
+        "subtitle4": "articles",
+        "description4": "Opinion pieces and features on current affairs and culture in Elche."
+    },
+    "ListSection": {
+        "button": {
+            "telenit": "See more TeleNit videos",
+            "entrevistas": "See more interview videos",
+            "eventos": "See more event videos",
+            "articulos": "See more articles"
+        },
+        "loading": "Loading videos...",
+        "error": "Videos could not be loaded.",
+        "viewAll": "See all {title} videos"
+    },
+    "PortfolioPage": {
+        "title": "Multimedia portfolio",
+        "description": "Collection of news videos, interviews and live broadcasts",
+        "backbutton": "Back to home",
+        "search": {
+            "title": "Search videos",
+            "placeholder": "Search videos...",
+            "loading": "Loading videos...",
+            "dontfind": "No videos matched your search.",
+            "empty": "There are no videos in this category yet."
+        },
+        "loadmore": "Load {count} more",
+        "category": {
+            "1": "Telenit",
+            "2": "Interviews",
+            "3": "Events"
+        },
+        "metaDescription": "Every video by Salvador Campello: TELENIT newscasts, interviews with leading figures from Elche public life, and live broadcasts of the city's main events.",
+        "error": "Videos could not be loaded. Please try again later.",
+        "scrolltop": "Back to top",
+        "sizetoggle": "Change card size",
+        "size": {
+            "big": "Large view",
+            "medium": "Medium view",
+            "small": "Small view"
+        }
+    },
+    "VideoCard": {
+        "play": "Play video: {title}"
+    },
+    "DialogYoutube": {
+        "title": "YouTube video",
+        "close": "Close",
+        "closelabel": "Close video"
+    },
+    "Contact": {
+        "title": "CONTACT",
+        "subtitle": "Want to get in touch?"
+    },
+    "SocialNetworks": {
+        "telephone": "Phone",
+        "mail": "Email"
+    },
+    "Footer": {
+        "legalnotice": "Legal Notice",
+        "privacitypolicy": "Privacy Policy",
+        "cookiespolicy": "Cookies Policy",
+        "changelanguage": "Change language"
+    },
+    "Metadata": {
+        "description": "Salvador Campello, journalist from Elche, General Manager at TeleElx and lecturer at the UMH. Newscasts, interviews and live broadcasts from Elche, Spain.",
+        "shortDescription": "Journalist from Elche",
+        "imageAlt": "Salvador Campello - Journalist from Elche",
+        "title": "Salvador Campello | Journalist, General Manager at TeleElx"
+    },
+    "Schema": {
+        "websiteDescription": "Official website of Salvador Campello, journalist and General Manager at TeleElx.",
+        "personDescription": "Journalist and General Manager at TeleElx. Expert in communication, audiovisual media and local television in Elche.",
+        "jobTitle": "General Manager at TeleElx",
+        "contactType": "Professional contact",
+        "birthPlace": "Elche, Spain",
+        "country": "Spain",
+        "knowsAbout": {
+            "0": "Journalism",
+            "1": "Communication",
+            "2": "Audiovisual media",
+            "3": "Local television",
+            "4": "Culture in Elche"
+        },
+        "alumniOf": "Miguel Hernández University of Elche"
+    },
+    "NotFound": {
+        "title": "Signal not found",
+        "subtitle": "This channel is not available in your schedule",
+        "description": "The page you are looking for may have been removed, renamed or is temporarily unavailable.",
+        "button": "Back to Home"
+    },
+    "Og": {
+        "homeEyebrow": "Journalist",
+        "portfolioEyebrow": "Portfolio",
+        "legalEyebrow": "Legal information"
+    },
+    "Gallery": {
+        "0": "Salvador Campello presenting the TeleElx newscast in the studio",
+        "1": "Salvador Campello during an interview in the TeleElx studio",
+        "2": "Salvador Campello on a live broadcast from Elche",
+        "3": "Salvador Campello with the TeleElx newsroom team",
+        "4": "Salvador Campello covering an official event in Elche",
+        "5": "Salvador Campello in front of the cameras during a recording",
+        "6": "Salvador Campello at the TELENIT news desk",
+        "7": "Salvador Campello at a cultural event in the city of Elche"
+    }
+}

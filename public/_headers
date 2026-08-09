@@ -1,0 +1,20 @@
+# Cabeceras para CloudFlare Pages.
+
+# next/og escribe las imágenes Open Graph SIN extensión
+# (p. ej. /portfolio/opengraph-image-1a2b3c), así que se sirven como
+# application/octet-stream y los scrapers de WhatsApp, X, Facebook y LinkedIn las
+# descartan: la tarjeta sale sin imagen. Aquí se les fija su tipo real.
+# El comodín cubre las cuatro formas que genera el build: con hash y sin él, a uno y
+# a dos niveles de profundidad (/opengraph-image-35z9gd, /en/opengraph-image,
+# /portfolio/opengraph-image-dmsve, /en/portfolio/opengraph-image).
+/*opengraph-image*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+# Los assets con hash en el nombre son inmutables.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Los listados de vídeo los reescribe cada noche la GitHub Action.
+/assets/data/*
+  Cache-Control: public, max-age=3600, must-revalidate

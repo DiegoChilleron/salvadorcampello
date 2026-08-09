@@ -1,0 +1,657 @@
+@import "tailwindcss";
+
+@theme inline {
+    --color-lightprimary: #F5F5F7;
+    --color-lightsecondary: #EFECE3;
+    --color-lighttertiary: #ECE3D1;
+    --color-darkprimary: #0E172C;
+    --color-darksecondary: #2F2F45;
+    --color-darktertiary: #464761;
+}
+
+@theme {
+    --text-xxs: 0.5rem;
+    --text-xxxs: 0.35rem;
+
+    /* La carga la gestiona next/font/local (src/app/fonts.ts) */
+    --font-sans: var(--font-open-sans), sans-serif;
+}
+
+
+html {
+    @apply text-gray-900 bg-lightprimary dark:text-white dark:bg-darkprimary font-normal;
+}
+
+/* Sustituye al `scrollIntoView({ behavior: 'smooth' })` que hacía el navbar en JS:
+   los enlaces del menú son anclas reales y el navegador ya sabe desplazarse a ellas. */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+h1 {
+    @apply text-center text-3xl md:text-4xl lg:text-5xl uppercase;
+}
+
+h2 {
+    @apply text-center text-3xl md:text-4xl xl:text-5xl py-8 tracking-widest uppercase;
+}
+
+h3 {
+    @apply text-xl md:text-3xl xl:text-4xl py-2 tracking-widest;
+}
+
+h4 {
+    @apply md:text-xl xl:text-2xl;
+}
+
+h5 {
+    @apply md:text-lg xl:text-xl font-semibold py-1;
+}
+
+p {
+    @apply ps-2;
+}
+
+.button {
+    @apply shadow-xs text-gray-900 bg-white hover:text-white border border-gray-300 hover:bg-gray-800 font-medium rounded-xl text-sm md:text-base px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-400 dark:text-gray-100 dark:bg-darkprimary dark:hover:text-white dark:hover:bg-gray-600 transition-all duration-300 ease-in-out;
+}
+
+section {
+    @apply py-24;
+}
+
+/* Header */
+
+nav {
+    @apply fixed top-0 left-0 w-full z-100 bg-gray-800/60 py-5 md:py-6 px-20 backdrop-blur-md;
+}
+
+nav a {
+    @apply py-4 border-b-2 border-transparent hover:border-white text-white hover:text-gray-300
+}
+
+.nav-div {
+    @apply flex items-center justify-end md:justify-center;
+}
+
+.nav-ul-desktop {
+    @apply hidden md:flex space-x-12;
+}
+
+.nav-ul-mobile {
+    @apply fixed z-200 flex-col h-screen bg-gray-800 content-center md:hidden space-y-12 text-center inset-0;
+}
+
+.nav-ul-mobile--closed {
+    @apply opacity-0 invisible pointer-events-none;
+}
+
+.nav-ul-mobile--open {
+    @apply opacity-100 visible pointer-events-auto;
+}
+
+.nav-ul-mobile a {
+    @apply font-light tracking-widest;
+}
+
+.hamburger-button {
+    @apply relative z-300;
+}
+
+.hamburger-icon {
+    @apply transition-transform duration-400 ease-[cubic-bezier(0.23,1,0.32,1)];
+}
+
+.hamburger-icon--open {
+    @apply rotate-90 scale-125;
+}
+
+/* Hero */
+
+.hero {
+    @apply relative h-lvh overflow-x-hidden;
+}
+
+.hero__h1-title {
+    text-shadow: 2px 2px 2px black;
+    @apply z-40 absolute bottom-[20lvh] inset-x-0 tracking-widest text-white font-medium;
+}
+
+.hero__img_person {
+    @apply z-20 fixed bottom-0 left-[30%] h-[80lvh] md:h-[90lvh] w-auto;
+}
+.hero__img_camera {
+    @apply z-30 fixed -bottom-20 md:bottom-0 left-0 h-[50lvh] md:h-[60lvh] w-auto;
+}
+.hero__img_background {
+    @apply z-0 fixed h-lvh bottom-0 w-full object-cover;
+}
+
+.hero__img_table {
+    @apply z-10 fixed bottom-[18lvh] md:bottom-0 -right-20 md:right-0 h-auto md:h-[65lvh] w-auto;
+}
+
+/* Description */
+
+.description__section {
+    @apply relative h-[3500px];
+}
+
+.description__container {
+    @apply z-30 absolute top-[1700px] right-0 w-[55%] pr-[7%] text-left text-lg md:text-xl tracking-wide text-gray-400;
+}
+
+.description__container p {
+    @apply py-3;
+}
+
+.description__container span {
+    @apply text-gray-200;
+}
+
+.date {
+    @apply text-gray-500;
+}
+
+/* Gallery */
+
+.gallery-button {
+    @apply z-20 hidden md:inline absolute top-1/2 transform -translate-y-1/2 text-black bg-white/80 py-3 px-5 rounded-full border-2 border-gray-600 shadow-md;
+}
+
+.gallery-div {
+    @apply max-w-full overflow-x-auto md:overflow-x-hidden scroll-smooth whitespace-nowrap px-8 md:px-20 pt-10 pb-24;
+}
+
+.gallery-div-ul {
+    @apply inline-flex flex-nowrap gap-x-8 md:gap-x-16;
+}
+
+.gallery-container {
+    @apply relative w-[309px] h-[450px] md:w-[400px] md:h-[500px] flex-shrink-0 transform transition duration-500 hover:scale-[1.02] hover:shadow-2xl rounded-2xl
+}
+
+/* Curriculum */
+
+.curriculum__grid {
+    @apply flex flex-wrap gap-x-12 pt-5 justify-center;
+}
+
+.curriculum__article {
+    @apply basis-full md:basis-2/5;
+}
+
+.curriculum__card {
+    @apply bg-white dark:bg-darksecondary rounded-2xl shadow-sm p-6 my-12;
+}
+
+/* Portfolio Multimedia */
+
+#portfolio {
+    @apply bg-lightsecondary dark:bg-darksecondary;
+
+}
+
+.list-section {
+    @apply px-5 md:px-10 py-10 md:py-20 my-20 bg-linear-110 md:bg-linear-120 from-55% to-55% md:from-65% md:to-65% from-lighttertiary to-lightsecondary dark:from-darktertiary dark:to-darksecondary;
+}
+
+.list-section__container {
+    @apply py-5;
+}
+
+.list-section__footer {
+    @apply flex justify-end py-12;
+}
+
+.portfolio-multimedia__button {
+    @apply p-6 rounded-3xl bg-white/10 hover:bg-white/20;
+}
+
+/* Contact */
+
+.contact {
+    @apply text-center bg-gradient-to-b from-lightsecondary to-lighttertiary dark:from-darksecondary dark:to-darktertiary;
+}
+
+section .contact__rrss {
+    @apply py-16 flex flex-wrap justify-center gap-4;
+}
+
+section .contact__rrss a {
+    @apply rounded-2xl min-w-max p-4 bg-slate-900/60 dark:bg-slate-100/60 transition-all duration-300 ease-in-out;
+}
+
+section .contact__rrss #instagram {
+    @apply hover:bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045];
+}
+
+section .contact__rrss #facebook {
+    @apply hover:bg-[#007CF3];
+}
+
+section .contact__rrss #twitter {
+    @apply hover:bg-black;
+}
+
+section .contact__rrss #linkedin {
+    @apply hover:bg-[#0077B5];
+}
+
+section .contact__rrss img {
+    @apply w-10 h-10 invert dark:invert-0;
+}
+
+.contact__method {
+    @apply pb-5 flex flex-wrap justify-center gap-7;
+}
+
+.contact__method a {
+    @apply flex items-center w-16 md:w-20 h-auto filter grayscale-[50%] hover:grayscale-0 transition;
+}
+
+/* Footer */
+
+footer {
+    @apply p-5 h-72 content-end bg-lighttertiary dark:bg-darktertiary;
+}
+
+
+.footer-div-lang {
+    @apply relative flex justify-center md:justify-end items-end;
+}
+
+.footer-lang-button {
+    @apply text-xs bg-white/20 hover:bg-white/10 rounded-xl p-2 m-1;
+}
+
+.footer-div-content {
+    @apply flex flex-wrap md:flex-nowrap items-end gap-y-4;
+}
+
+.footer-content-website {
+    @apply w-full md:order-2 text-center tracking-wider;
+}
+
+.footer-content-links {
+    @apply flex md:order-3 w-full justify-between md:justify-end md:gap-x-5 text-center text-xs;
+}
+
+footer .contact__rrss {
+    @apply flex md:order-1 w-full justify-center gap-x-2;
+}
+
+footer .contact__rrss img {
+    @apply w-8 h-8 dark:invert;
+}
+
+/* Portfolio Multimedia */
+
+.portfolio-multimedia__container {
+    @apply flex flex-wrap justify-around md:justify-center w-full py-7 md:gap-x-16 md:text-2xl font-semibold tracking-widest text-white;
+}
+
+.button-category {
+    @apply uppercase tracking-widest shadow-xs border border-gray-300 font-medium rounded-xl text-xl md:text-2xl py-3 text-center my-1 mx-4 w-54 md:w-64 dark:border-gray-600;
+}
+
+.search-box {
+    @apply block w-full pl-10 pr-3 py-2 border border-gray-400 rounded-lg bg-white dark:bg-slate-800 text-gray-800 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700;
+}
+
+/* Legal */
+.legal-container {
+    @apply py-40 px-4 bg-lightprimary dark:bg-darkprimary;
+}
+
+.legal-container h1,
+.legal-container h2,
+.legal-container h3,
+.legal-container {
+    @apply text-left mx-auto max-w-5xl;
+}
+
+/* Videos */
+/* Eran dos reglas `.video-card` seguidas y en conflicto: la segunda ya ganaba en
+   `background`, `transition` y `hover:scale`, así que el fondo, la duración y la
+   escala de la primera no llegaban a aplicarse nunca. Fusionadas conservando lo
+   que de hecho estaba en vigor. */
+.video-card {
+    @apply mx-auto w-full max-w-3xl p-[2px] shadow-xl cursor-pointer
+           bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600
+           transform transition-transform duration-200 hover:scale-105;
+    content-visibility: auto;
+}
+
+/* La tarjeta es `role="button"` y recibe el foco, así que tiene que indicarlo.
+   `outline` en vez de `ring` porque se dibuja por fuera del borde y no lo tapa
+   la miniatura, que ocupa la tarjeta entera. */
+.video-card:focus-visible {
+    outline: 3px solid var(--color-blue-700);
+    outline-offset: 2px;
+}
+
+.youtube-icon {
+    @apply absolute grid place-items-center inset-0 z-10 opacity-50 group-hover:opacity-100 transition-opacity duration-500;
+}
+
+/* Sin `will-change`: eran 3 capas de compositor por tarjeta (240 con 80 tarjetas en
+   la vista «small»), reservadas de forma permanente para transiciones que solo ocurren
+   al pasar el ratón. El navegador ya promociona la capa al empezar la transición. */
+.videocard-image {
+    @apply absolute object-cover w-full h-full bg-black;
+}
+
+.videocard-text {
+    @apply px-1 text-center truncate group-hover:text-red-700;
+}
+
+
+dialog::backdrop {
+    @apply backdrop-blur-sm bg-black/50
+}
+
+/* 404 Page */
+@keyframes flicker {
+    0% {
+        opacity: 0.2;
+    }
+
+    25% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    75% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
+
+.bg-static {
+    animation: flicker 0.15s infinite;
+    background-size: 150px;
+}
+
+/* El parpadeo a 0.15s es justo lo que prefers-reduced-motion busca evitar. */
+@media (prefers-reduced-motion: reduce) {
+    .bg-static {
+        animation: none;
+        opacity: 0.3;
+    }
+}
+
+.tv-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+    pointer-events: none;
+}
+/* ============================================================
+   REVEAL ANIMATIONS
+   ------------------------------------------------------------
+   Se disparan UNA vez, al asomar el elemento en el viewport, y
+   se reproducen solas durante su duración (como el `whileInView`
+   + `once: true` que había con motion).
+
+   El disparo lo da `RevealOnScroll` (un IntersectionObserver
+   global) añadiendo `is-visible`.
+
+   Uso desde el JSX:
+     <div data-reveal="fade-up" />
+     <div data-reveal="fade-up" style={{ '--stagger': i }} />
+     <div data-reveal="slide-left" style={{ '--reveal-duration': '2s' }} />
+
+   Dos fallbacks:
+   - `prefers-reduced-motion: reduce` → no se declara nada, todo
+     visible y quieto.
+   - Sin JS, `html.js-reveal` nunca se añade, así que el estado
+     inicial oculto tampoco se aplica: el contenido se ve igual.
+   ============================================================ */
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(3rem); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-left {
+    from { opacity: 0; transform: translateX(3rem); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-right {
+    from { opacity: 0; transform: translateX(-3rem); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Desplazamiento puro, sin fade: replica el `x: 300 -> 0` del carrusel. */
+@keyframes slide-left {
+    from { transform: translateX(300px); }
+    to   { transform: translateX(0); }
+}
+
+@keyframes zoom-in {
+    from { opacity: 0; transform: scale(0.6); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+    /* Estado inicial: igual al `from` de cada keyframe. */
+    .js-reveal [data-reveal] {
+        opacity: 0;
+    }
+
+    .js-reveal [data-reveal="fade-up"]    { transform: translateY(3rem); }
+    .js-reveal [data-reveal="fade-left"]  { transform: translateX(3rem); }
+    .js-reveal [data-reveal="fade-right"] { transform: translateX(-3rem); }
+    .js-reveal [data-reveal="zoom-in"]    { transform: scale(0.6); }
+
+    /* La galería original no cambiaba la opacidad, solo la posición. */
+    .js-reveal [data-reveal="slide-left"] {
+        opacity: 1;
+        transform: translateX(300px);
+    }
+
+    .js-reveal [data-reveal].is-visible {
+        animation-duration: var(--reveal-duration, 0.8s);
+        animation-delay: calc(var(--stagger, 0) * 0.2s);
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+    }
+
+    .js-reveal [data-reveal="fade-in"].is-visible    { animation-name: fade-in; }
+    .js-reveal [data-reveal="fade-up"].is-visible    { animation-name: fade-up; }
+    .js-reveal [data-reveal="fade-left"].is-visible  { animation-name: fade-left; }
+    .js-reveal [data-reveal="fade-right"].is-visible { animation-name: fade-right; }
+    .js-reveal [data-reveal="slide-left"].is-visible { animation-name: slide-left; }
+    .js-reveal [data-reveal="zoom-in"].is-visible    { animation-name: zoom-in; }
+}
+
+/* ------------------------------------------------------------
+   ENTRY ANIMATIONS (404)
+   No dependen del scroll: se lanzan una vez al montar la página.
+   ------------------------------------------------------------ */
+
+@keyframes tv-turn-on {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes tv-message-in {
+    from { opacity: 0; transform: translateY(-1.25rem); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .animate-tv-turn-on    { animation: tv-turn-on 0.5s ease-out both; }
+    .animate-tv-message-in { animation: tv-message-in 0.4s ease-out 0.3s both; }
+}
+
+/* Sustituye a whileHover/whileTap de motion */
+.press-scale {
+    transition: transform 0.15s ease-out;
+}
+
+.press-scale:hover  { transform: scale(1.05); }
+.press-scale:active { transform: scale(0.95); }
+
+@media (prefers-reduced-motion: reduce) {
+    .press-scale:hover,
+    .press-scale:active { transform: none; }
+}
+
+/* ============================================================
+   HERO — coreografía ligada al scroll
+   ------------------------------------------------------------
+   Doce animaciones sobre cinco capas, todas gobernadas por la
+   posición absoluta de scroll del documento. Sustituyen al
+   `useScroll` + `useTransform` de motion, que actualizaba doce
+   valores por frame en el hilo principal; aquí corre en el
+   compositor y se ahorran ~132 KB de JS en el home.
+
+   Los rangos en px son los mismos que tenían los `useTransform`.
+   `calc(-100vw - 200px)` sustituye a `-(windowWidth + 200)`, que
+   en JS obligaba a un `useState` y un listener de resize.
+
+   FALLBACK (ver más abajo): sin `animation-timeline` las capas
+   son `fixed` y se quedarían pegadas al viewport tapando los
+   3.500 px de la descripción. Por eso el `position: fixed` solo
+   se aplica cuando hay soporte.
+   ============================================================ */
+
+@keyframes hero-person-move {
+    from { translate: 0 0; scale: 1; }
+    to   { translate: -140px 120px; scale: 1.2; }
+}
+
+/* Tres paradas [0, 2400, 3200] → [1, 1, 0]: se mantiene opaca hasta el 75%. */
+@keyframes hero-person-fade {
+    0%, 75% { opacity: 1; }
+    100%    { opacity: 0; }
+}
+
+@keyframes hero-hide {
+    from { visibility: visible; }
+    to   { visibility: hidden; }
+}
+
+@keyframes hero-camera-slide {
+    from { translate: 0 0; }
+    to   { translate: calc(-100vw - 200px) 0; }
+}
+
+@keyframes hero-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes hero-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes hero-table-slide {
+    from { translate: 0 0; }
+    to   { translate: calc(100vw + 200px) 0; }
+}
+
+@keyframes hero-background-rise {
+    from { translate: 0 0; }
+    to   { translate: 0 -1500px; }
+}
+
+/* ------------------------------------------------------------
+   FALLBACK — sin `animation-timeline` o con movimiento reducido
+   ------------------------------------------------------------
+   Las capas no son `fixed`, así que ocupan solo la altura del
+   hero y la descripción scrollea limpia por debajo. Se ve un
+   primer plano quieto e intencionado, no cinco imágenes pegadas
+   al viewport tapando el texto.
+   ------------------------------------------------------------ */
+
+.hero__img_person,
+.hero__img_camera,
+.hero__img_camera--second,
+.hero__img_table,
+.hero__img_background {
+    position: absolute;
+}
+
+/* La segunda cámara solo tiene sentido con la coreografía: es el relevo de la
+   primera a los 50 px de scroll. Sin animación se solaparían las dos. */
+.hero__img_camera--second {
+    display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .hero__img_camera--second {
+            display: revert;
+        }
+    }
+}
+
+@supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+
+        .hero__img_person,
+        .hero__img_camera,
+        .hero__img_camera--second,
+        .hero__img_table,
+        .hero__img_background {
+            position: fixed;
+            animation-timeline: scroll(root block);
+            animation-timing-function: linear;
+            animation-fill-mode: both;
+            animation-duration: auto;
+        }
+
+        .hero__img_person {
+            animation-name: hero-person-move, hero-person-fade, hero-hide;
+            animation-range: 600px 2000px, 0 3200px, 3300px 3400px;
+        }
+
+        .hero__img_camera {
+            animation-name: hero-camera-slide, hero-fade-out, hero-hide;
+            animation-range: 10px 2000px, 0 500px, 3300px 3400px;
+        }
+
+        /* La segunda cámara entra en los primeros 50 px y comparte el desplazamiento. */
+        .hero__img_camera--second {
+            animation-name: hero-camera-slide, hero-fade-in, hero-hide;
+            animation-range: 10px 2000px, 0 50px, 3300px 3400px;
+        }
+
+        .hero__img_table {
+            animation-name: hero-table-slide, hero-fade-out, hero-hide;
+            animation-range: 200px 3000px, 800px 2000px, 3300px 3400px;
+        }
+
+        .hero__img_background {
+            animation-name: hero-background-rise, hero-fade-out, hero-hide;
+            animation-range: 500px 3000px, 500px 2000px, 3300px 3400px;
+        }
+    }
+}

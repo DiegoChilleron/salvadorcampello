@@ -1,0 +1,57 @@
+name: Update YouTube Videos
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Se ejecuta todos los días a las 2 AM UTC
+  workflow_dispatch:      # Permite ejecutar el workflow manualmente
+
+permissions:
+  contents: write
+
+# Dos ejecuciones a la vez (el cron y un disparo manual) reescribirían los mismos JSON
+# y la segunda haría push sobre una base desactualizada. Se encolan, no se cancelan.
+concurrency:
+  group: update-videos
+  cancel-in-progress: false
+
+jobs:
+  update-videos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ github.token }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      # Sin package.json propio en el paso: `npm install axios` a secas crea uno y deja
+      # el árbol sucio, que luego confunde al `git add`. Se instala fuera del repo.
+      - name: Install dependencies
+        run: npm install --no-save axios
+
+      # `--experimental-modules` sobra desde Node 12: el script ya es ESM por su
+      # extensión y la resolución de módulos es estable.
+      - name: Update YouTube video listings
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: node .github/workflows/scripts/update-youtube-videos.js
+
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/assets/data/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update YouTube video listings [automated]"
+            # `actions/checkout` ya deja el token configurado en el remoto, así que no
+            # hace falta reinyectarlo en la URL (donde además acababa en los logs).
+            git push origin HEAD:${GITHUB_REF_NAME}
+            echo "Changes committed and pushed"
+          fi
