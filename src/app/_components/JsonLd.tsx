@@ -7,34 +7,55 @@ import {
     SOCIAL_LINKS,
     SITE_LAST_MODIFIED,
 } from '@/config/site';
+import { absoluteUrl } from '@/config/canonicals';
+import { JsonLdScript } from '@/lib/jsonLd';
 import type { Locale } from '@/i18n/routing';
 
 /** Grafo Schema.org (WebSite + Person) que antes vivía inline en index.html. */
 export async function JsonLd({ locale }: { locale: Locale }) {
     const t = await getTranslations({ locale, namespace: 'Schema' });
 
+    /**
+     * Home del idioma en curso, con su prefijo y su barra final: la misma URL que
+     * el canonical. Con `SITE_URL` a secas, las páginas de /en/, /ca/ e /it/
+     * declaraban la home española en `url` mientras el canonical apuntaba a la
+     * suya, y encima sin la barra final.
+     */
+    const home = absoluteUrl('home', locale);
+
+    /**
+     * Los `@id` cuelgan de la home de cada idioma. Sin ellos, `publisher` era un
+     * nodo `Person` repetido en línea: dos entidades distintas para la misma
+     * persona, y la del `publisher` sin `sameAs`, `jobTitle` ni `worksFor`.
+     *
+     * Un `@id` único para los cuatro idiomas tampoco vale: los cuatro árboles
+     * describen a la misma persona en su idioma, así que harían afirmaciones
+     * contradictorias (cuatro `description`, cuatro `jobTitle`) sobre una sola
+     * entidad. Los enlaza `sameAs` junto a los perfiles sociales.
+     */
+    const websiteId = `${home}#website`;
+    const personId = `${home}#person`;
+
     const graph = {
         '@context': 'https://schema.org',
         '@graph': [
             {
                 '@type': 'WebSite',
-                url: SITE_URL,
+                '@id': websiteId,
+                url: home,
                 name: SITE_NAME,
                 description: t('websiteDescription'),
                 inLanguage: locale,
                 dateModified: SITE_LAST_MODIFIED,
-                publisher: {
-                    '@type': 'Person',
-                    name: SITE_NAME,
-                    url: SITE_URL,
-                },
+                publisher: { '@id': personId },
             },
             {
                 '@type': 'Person',
+                '@id': personId,
                 name: SITE_NAME,
                 alternateName: 'Salva Campello',
                 image: `${SITE_URL}/assets/icons/profile.webp`,
-                url: SITE_URL,
+                url: home,
                 description: t('personDescription'),
                 jobTitle: t('jobTitle'),
                 worksFor: {
@@ -51,7 +72,11 @@ export async function JsonLd({ locale }: { locale: Locale }) {
                     '@type': 'Country',
                     name: t('country'),
                 },
-                knowsAbout: [0, 1, 2, 3, 4].map((i) => t(`knowsAbout.${i}`)),
+                // `t.raw` y no una lista de índices a mano: con `knowsAbout.0…4`
+                // fijos, un idioma que añadiera un tema lo perdía en silencio y
+                // otro que quitara uno publicaba la clave literal como si fuera
+                // texto ("Schema.knowsAbout.4").
+                knowsAbout: Object.values(t.raw('knowsAbout') as Record<string, string>),
                 alumniOf: {
                     '@type': 'EducationalOrganization',
                     name: t('alumniOf'),
@@ -66,16 +91,11 @@ export async function JsonLd({ locale }: { locale: Locale }) {
                     '@type': 'ContactPoint',
                     contactType: t('contactType'),
                     email: CONTACT_EMAIL,
-                    url: `${SITE_URL}/#contacto`,
+                    url: `${home}#contacto`,
                 },
             },
         ],
     };
 
-    return (
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-        />
-    );
+    return <JsonLdScript data={graph} />;
 }

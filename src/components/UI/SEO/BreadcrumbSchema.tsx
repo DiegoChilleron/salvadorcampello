@@ -1,4 +1,5 @@
 import { absoluteUrl } from '@/config/canonicals';
+import { JsonLdScript } from '@/lib/jsonLd';
 import type { RouteKey } from '@/config/routes';
 import type { Locale } from '@/i18n/routing';
 
@@ -25,10 +26,5 @@ export function BreadcrumbSchema({ items, locale }: BreadcrumbSchemaProps) {
         })),
     };
 
-    return (
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-    );
+    return <JsonLdScript data={schema} />;
 }
