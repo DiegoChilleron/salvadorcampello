@@ -4,6 +4,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { PortfolioMultimediaAllVideos } from '@/components';
 import { buildPageMetadata } from '@/config/metadata';
 import { BreadcrumbSchema } from '@/components/UI/SEO/BreadcrumbSchema';
+import { VideoListSchema } from '@/components/UI/SEO/VideoListSchema';
+import { getInitialVideos, toClientVideos } from '@/lib/videos';
 
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations({ locale: 'ca', namespace: 'PortfolioPage' });
@@ -22,6 +24,9 @@ export default async function CaPortfolio() {
     setRequestLocale('ca');
     const t = await getTranslations({ locale: 'ca', namespace: 'PortfolioPage' });
     const nav = await getTranslations({ locale: 'ca', namespace: 'Navbar' });
+    // Lectura en build de los listados: sin esto la página servía 352 caracteres de
+    // texto y todo el catálogo llegaba por fetch de cliente (ver src/lib/videos.ts).
+    const videos = getInitialVideos();
 
     return (
         <main>
@@ -32,7 +37,8 @@ export default async function CaPortfolio() {
                     { name: t('title'), key: 'portfolio' },
                 ]}
             />
-            <PortfolioMultimediaAllVideos />
+            <VideoListSchema locale="ca" videos={videos} />
+            <PortfolioMultimediaAllVideos initialVideos={toClientVideos(videos)} />
         </main>
     );
 }

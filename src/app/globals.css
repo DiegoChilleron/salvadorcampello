@@ -318,15 +318,17 @@ footer .contact__rrss img {
    `background`, `transition` y `hover:scale`, así que el fondo, la duración y la
    escala de la primera no llegaban a aplicarse nunca. Fusionadas conservando lo
    que de hecho estaba en vigor. */
+/* `block` porque la tarjeta pasó de `<div>` a `<a>` (enlace al vídeo en YouTube, para
+   que el catálogo prerenderizado sea crawleable): en un ancla, que es inline por
+   defecto, `w-full` y `max-w-3xl` no tendrían ningún efecto. */
 .video-card {
-    @apply mx-auto w-full max-w-3xl p-[2px] shadow-xl cursor-pointer
+    @apply block mx-auto w-full max-w-3xl p-[2px] shadow-xl cursor-pointer
            bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600
            transform transition-transform duration-200 hover:scale-105;
     content-visibility: auto;
 }
 
-/* La tarjeta es `role="button"` y recibe el foco, así que tiene que indicarlo.
-   `outline` en vez de `ring` porque se dibuja por fuera del borde y no lo tapa
+/* `outline` en vez de `ring` porque se dibuja por fuera del borde y no lo tapa
    la miniatura, que ocupa la tarjeta entera. */
 .video-card:focus-visible {
     outline: 3px solid var(--color-blue-700);

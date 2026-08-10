@@ -3,6 +3,7 @@ import type { MetadataRoute } from 'next';
 import { absoluteUrl } from '@/config/canonicals';
 import { routeLocales, type RouteKey } from '@/config/routes';
 import { SITE_LAST_MODIFIED } from '@/config/site';
+import { routing } from '@/i18n/routing';
 
 // Requerido por `output: 'export'` en las rutas de metadatos.
 export const dynamic = 'force-static';
@@ -30,7 +31,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority,
             changeFrequency,
             alternates: {
-                languages: Object.fromEntries(locales.map((l) => [l, absoluteUrl(key, l)])),
+                languages: {
+                    ...Object.fromEntries(locales.map((l) => [l, absoluteUrl(key, l)])),
+                    // Mismo `x-default` que el <head> (ver generateAlternates): sin él,
+                    // el sitemap y la página declaraban conjuntos de hreflang distintos
+                    // para la misma URL.
+                    ...(locales.includes(routing.defaultLocale)
+                        ? { 'x-default': absoluteUrl(key, routing.defaultLocale) }
+                        : {}),
+                },
             },
         }));
     });

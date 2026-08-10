@@ -77,11 +77,22 @@ function parseTitleDate(title) {
     yearNum = yearNum < 50 ? 2000 + yearNum : 1900 + yearNum;
   }
 
-  if (monthNum < 1 || monthNum > 12 || dayNum < 1 || dayNum > 31) {
+  if (monthNum < 1 || monthNum > 12 || dayNum < 1) {
     return null;
   }
 
-  return Date.UTC(yearNum, monthNum - 1, dayNum);
+  // Ida y vuelta en vez de comprobar `dayNum <= 31`: `Date.UTC(2025, 10, 31)` no falla,
+  // desborda en silencio al 1 de diciembre, así que un título acabado en `31/11/25`
+  // se evaluaba contra una fecha que no era la suya en los filtros de exclusión y de
+  // congelación. El mismo criterio que `parseTitleDate` en src/lib/videos.ts.
+  const timestamp = Date.UTC(yearNum, monthNum - 1, dayNum);
+  const date = new Date(timestamp);
+
+  if (date.getUTCMonth() !== monthNum - 1 || date.getUTCDate() !== dayNum) {
+    return null;
+  }
+
+  return timestamp;
 }
 
 /**
@@ -111,7 +122,11 @@ async function fetchVideosFromPlaylist(playlistId, category, retryCount = 0) {
   
   do {
     const params = {
-      part: 'snippet,status',
+      // `contentDetails` trae `videoPublishedAt`, que es cuando se publicó el vídeo.
+      // El `publishedAt` de `snippet` NO sirve: en un `playlistItem` es la fecha en la
+      // que el vídeo se añadió a la lista, así que en una playlist rellenada de golpe
+      // todos los vídeos comparten fecha.
+      part: 'snippet,status,contentDetails',
       maxResults: 50,
       playlistId: playlistId,
       key: API_KEY,
@@ -132,7 +147,7 @@ async function fetchVideosFromPlaylist(playlistId, category, retryCount = 0) {
       
       const items = response.data.items || [];
       
-      // Extraer solo title y videoId, excluyendo videos privados y fechas excluidas
+      // Extraer title, videoId y publishedAt, excluyendo videos privados y fechas excluidas
       const parsedVideos = items
         .filter(item => {
           // Filtrar videos privados de forma más robusta
@@ -168,9 +183,16 @@ async function fetchVideosFromPlaylist(playlistId, category, retryCount = 0) {
 
           return true;
         })
+        // `publishedAt` alimenta el `uploadDate` del VideoObject del portfolio
+        // (src/components/UI/SEO/VideoListSchema.tsx), que Google exige para dar por
+        // válido el marcado.
+        //
+        // El fallback cuando falta es la fecha del título (src/lib/videos.ts), la misma
+        // que usa `parseTitleDate` aquí arriba para decidir exclusiones.
         .map(item => ({
           title: item.snippet.title.trim(),
-          videoId: item.snippet.resourceId.videoId
+          videoId: item.snippet.resourceId.videoId,
+          publishedAt: item.contentDetails?.videoPublishedAt
         }));
       
       videos.push(...parsedVideos);

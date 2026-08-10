@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, memo, useMemo } from 'react';
+import { useEffect, useState, useCallback, memo, useMemo, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { HiChevronDown } from 'react-icons/hi2';
 
@@ -13,6 +13,14 @@ interface ListSectionAllVideosProps {
     category: CategoryId;
     cardSize: CardSize;
     searchTerm: string;
+    /**
+     * Listado recortado que ya viene resuelto en el HTML (src/lib/videos.ts). Es el
+     * estado inicial, no un `fetch` que se evita: al activarse se sigue pidiendo el
+     * catálogo completo para que la búsqueda alcance también a los vídeos antiguos.
+     */
+    initialVideos: Video[];
+    /** Pestaña visible. Las otras se renderizan igual, pero ocultas y sin pedir nada. */
+    isActive: boolean;
 }
 
 const PAGINATION_CONFIG = {
@@ -40,27 +48,72 @@ export const ListSectionAllVideos = memo(function ListSectionAllVideos({
     category,
     cardSize,
     searchTerm,
+    initialVideos,
+    isActive,
 }: ListSectionAllVideosProps) {
     const t = useTranslations('PortfolioPage');
-    const [videos, setVideos] = useState<Video[]>([]);
+    const [videos, setVideos] = useState<Video[]>(initialVideos);
     const [isLoading, setIsLoading] = useState(false);
     // Un booleano y no el texto ya traducido: así el efecto no depende de `t` y
     // el mensaje se resuelve en el render, con el idioma vigente.
     const [hasError, setHasError] = useState(false);
-    const [displayCount, setDisplayCount] = useState<number>(
-        () => PAGINATION_CONFIG[cardSize].itemsPerPage,
+    /**
+     * Petición en vuelo teniendo ya vídeos en pantalla. No enseña «Cargando vídeos…» en
+     * lugar de la lista (para eso está `isLoading`), pero sí evita que una búsqueda diga
+     * «no se encontraron vídeos» cuando lo cierto es que el catálogo antiguo todavía no
+     * ha llegado: alcanzar esos vídeos es justo para lo que sirve la petición.
+     */
+    const [isExpanding, setIsExpanding] = useState(false);
+    // Se pinta todo lo prerenderizado, no la primera página: si se cortara en
+    // `itemsPerPage` (24 en vista grande), los otros ~230 vídeos que la page resolvió en
+    // build viajarían en el HTML sin llegar al DOM, que es justo lo que lee el rastreador.
+    // `content-visibility: auto` en `.video-card` evita que las tarjetas de más abajo
+    // cuesten pintado.
+    const [displayCount, setDisplayCount] = useState<number>(() =>
+        Math.max(PAGINATION_CONFIG[cardSize].itemsPerPage, initialVideos.length),
     );
 
+    /**
+     * Volver a la primera página al cambiar de tamaño o de búsqueda, pero **no** al
+     * montar: en el primer pase este efecto recortaba a `itemsPerPage` las 251 tarjetas
+     * que la page acababa de prerenderizar, así que nada más hidratar desaparecían del
+     * DOM 179 de ellas —un salto de contenido enorme— y el trabajo del servidor se
+     * tiraba a la basura.
+     *
+     * Se compara el valor anterior en vez de llevar una bandera de «primera ejecución»:
+     * StrictMode invoca el efecto dos veces al montar, y con la bandera la segunda pasada
+     * ya la habría consumido la primera, así que el recorte volvía en desarrollo.
+     */
+    const lastPagingInput = useRef({ cardSize, searchTerm });
+
     useEffect(() => {
+        const previous = lastPagingInput.current;
+        if (previous.cardSize === cardSize && previous.searchTerm === searchTerm) return;
+
+        lastPagingInput.current = { cardSize, searchTerm };
         setDisplayCount(PAGINATION_CONFIG[cardSize].itemsPerPage);
     }, [cardSize, searchTerm]);
 
     useEffect(() => {
+        // La categoría oculta no pide nada: son tres listados y bajarlos todos al montar
+        // serían ~200 KB para pestañas que quizá no se abran. Hasta que se active, se
+        // queda con lo prerenderizado, que ya está en el DOM.
+        if (!isActive) return;
+
         let cancelled = false;
 
-        setVideos([]);
+        // Con la lista ya prerenderizada no se vacía el estado ni se enseña el mensaje
+        // de carga: sustituirla por «Cargando vídeos…» sería un parpadeo que borra
+        // contenido que ya está pintado. La petición solo la amplía.
+        const hasPrerendered = initialVideos.length > 0;
+
+        if (hasPrerendered) {
+            setIsExpanding(true);
+        } else {
+            setVideos([]);
+            setIsLoading(true);
+        }
         setHasError(false);
-        setIsLoading(true);
 
         // `setVideos` y `setIsLoading` van juntos en el mismo callback a propósito.
         // Separarlos en `.then()` y `.finally()` los deja en microtareas distintas, o
@@ -72,18 +125,23 @@ export const ListSectionAllVideos = memo(function ListSectionAllVideos({
                 if (cancelled) return;
                 setVideos(data);
                 setIsLoading(false);
+                setIsExpanding(false);
             })
             .catch((err) => {
                 console.error('Error cargando videos:', err);
                 if (cancelled) return;
-                setHasError(true);
+                // Si había vídeos prerenderizados se conservan: el catálogo completo no
+                // llega, pero cambiar una lista visible por un error es peor que
+                // quedarse con los ~150 más recientes.
+                if (!hasPrerendered) setHasError(true);
                 setIsLoading(false);
+                setIsExpanding(false);
             });
 
         return () => {
             cancelled = true;
         };
-    }, [category]);
+    }, [category, initialVideos, isActive]);
 
     const filteredVideos = useMemo(() => {
         if (!searchTerm.trim()) {
@@ -163,11 +221,16 @@ export const ListSectionAllVideos = memo(function ListSectionAllVideos({
                     )}
                 </>
             ) : (
-                // Aquí `isLoading` ya es false, así que no quedan vídeos por llegar:
-                // si la lista está vacía, la categoría está vacía. Antes se mostraba
-                // `search.loading` y el mensaje de carga se quedaba fijo para siempre.
+                // Con `isLoading` a false no quedan vídeos por llegar y una lista vacía
+                // significa categoría vacía. La excepción es `isExpanding`: hay lista
+                // prerenderizada, pero el catálogo completo sigue en camino, así que una
+                // búsqueda sin resultados todavía puede encontrarlos.
                 <div className="col-span-full text-center p-4">
-                    {searchTerm ? t('search.dontfind') : t('search.empty')}
+                    {!searchTerm
+                        ? t('search.empty')
+                        : isExpanding
+                          ? t('search.loading')
+                          : t('search.dontfind')}
                 </div>
             )}
         </div>

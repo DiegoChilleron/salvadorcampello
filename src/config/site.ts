@@ -35,3 +35,18 @@ export const SOCIAL_LINKS = {
     twitter: 'https://twitter.com/SalvaElx',
     linkedin: 'https://es.linkedin.com/in/salvadorcampelloiborra',
 } as const;
+
+/** Cuenta de X para `twitter:site` y `twitter:creator`. */
+export const TWITTER_HANDLE = '@SalvaElx';
+
+/**
+ * `og:locale` en el formato `idioma_TERRITORIO` que pide el protocolo Open Graph.
+ * Con el código de idioma a secas (`es`, `en`) Facebook y LinkedIn descartan la
+ * etiqueta y caen a su idioma por defecto.
+ */
+export const OG_LOCALES = {
+    es: 'es_ES',
+    en: 'en_GB',
+    ca: 'ca_ES',
+    it: 'it_IT',
+} as const;

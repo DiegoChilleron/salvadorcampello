@@ -12,6 +12,12 @@ export interface Video {
     videoId: string;
     title: string;
     thumbnail?: string;
+    /**
+     * Fecha de publicación en YouTube, en ISO. La escribe la Action nocturna. Opcional
+     * porque los listados anteriores a ese cambio no la traen; para esos, `videoUploadDate`
+     * (src/lib/videos.ts) cae a la fecha del título.
+     */
+    publishedAt?: string;
 }
 
 export type CardSize = 'big' | 'medium' | 'small';
@@ -74,33 +80,27 @@ export const VideoCard = memo(function VideoCard({ video, size = 'medium' }: Vid
             : PLACEHOLDER;
     }, [isInView, video.videoId, size]);
 
-    const handleClick = useCallback(() => {
-        openDialog(video.videoId);
-    }, [video.videoId]);
-
     /**
-     * La tarjeta es un `<div role="button">` y no un `<button>` de verdad porque
-     * su contenido (divs, un `<p>`) es contenido de flujo, que dentro de
-     * `<button>` es HTML inválido. Con el rol hay que reponer a mano lo que el
-     * elemento nativo daba gratis: el foco (`tabIndex`) y la activación por
-     * Enter y Espacio. Sin esto el catálogo entero era inalcanzable sin ratón.
+     * La tarjeta es un `<a>` al vídeo en YouTube, no un `<div role="button">`.
      *
-     * Tampoco es un `<article>`: ese elemento solo admite los roles de
-     * documento (`region`, `main`, `none`…), así que `role="button"` encima de
-     * él es una combinación inválida —`aria-allowed-role`, que es lo que
-     * PageSpeed marcaba— aunque el árbol de accesibilidad ya expusiera un botón.
-     * Un `<div>` no tiene rol implícito que contradecir.
+     * El motivo es de indexación: con un div el rastreador leía el título pero no
+     * encontraba ningún enlace, así que las ~250 tarjetas que ahora vienen en el HTML
+     * eran texto suelto sin destino. Un ancla las convierte en enlaces salientes reales.
+     *
+     * De paso se cae todo el apaño de accesibilidad que exigía el div: `<a href>` ya es
+     * focusable y se activa con Enter de forma nativa, y admite contenido de flujo (que
+     * es lo que impedía usar un `<button>` de verdad). El clic normal lo intercepta el
+     * diálogo; los clics con modificador se dejan pasar para que «abrir en pestaña
+     * nueva» siga llevando a YouTube.
      */
-    const handleKeyDown = useCallback(
-        (event: React.KeyboardEvent<HTMLElement>) => {
-            if (event.key !== 'Enter' && event.key !== ' ') return;
+    const handleClick = useCallback(
+        (event: React.MouseEvent<HTMLAnchorElement>) => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
-            // El Espacio desplaza la página si se deja pasar, y ambas teclas
-            // llegarían al diálogo que se acaba de abrir.
             event.preventDefault();
-            handleClick();
+            openDialog(video.videoId);
         },
-        [handleClick],
+        [video.videoId],
     );
 
     const handleImageLoad = useCallback(() => {
@@ -113,12 +113,10 @@ export const VideoCard = memo(function VideoCard({ video, size = 'medium' }: Vid
         SIZE_VARIANTS[size] || SIZE_VARIANTS.medium;
 
     return (
-        <div
+        <a
+            href={`https://www.youtube.com/watch?v=${video.videoId}`}
             className={`video-card group ${roundedClasses}`}
-            role="button"
-            tabIndex={0}
             onClick={handleClick}
-            onKeyDown={handleKeyDown}
             aria-label={t('play', { title: video.title })}
         >
             <div className="relative pb-[55%]">
@@ -140,6 +138,6 @@ export const VideoCard = memo(function VideoCard({ video, size = 'medium' }: Vid
                 />
             </div>
             <p className={`videocard-text ${titleClasses}`}> {video.title} </p>
-        </div>
+        </a>
     );
 });

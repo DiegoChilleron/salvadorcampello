@@ -1,57 +1,32 @@
-'use client';
-
-import { memo, useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { Link } from '@/i18n/navigation';
 import { routePath } from '@/config/routes';
 import type { Locale } from '@/i18n/routing';
 import { VideoCard, type Video } from '../VideoCard';
-import { fetchVideos } from '../fetchVideos';
 import type { CategoryId } from '../categories';
 
 interface ListSectionProps {
     id: CategoryId;
     title: string;
     description: string;
+    /** Los 3 vídeos más recientes, resueltos en build (src/lib/videos.ts). */
+    videos: Video[];
 }
 
-export const ListSection = memo(function ListSection({
-    id,
-    title,
-    description,
-}: ListSectionProps) {
+/**
+ * Server Component. Antes era de cliente solo para pedir con `fetchVideos` los 3 vídeos
+ * que muestra: eso descargaba los tres listados completos —1.712 entradas solo el de
+ * telenit— en cada visita a la home para pintar 9 miniaturas, y dejaba la sección vacía
+ * en el HTML. Ahora los vídeos llegan como prop desde la page y aquí no queda estado:
+ * ni petición, ni mensajes de carga y error, ni JavaScript.
+ *
+ * `VideoCard` sigue siendo de cliente (abre el diálogo), pero es él quien lleva su propia
+ * directiva.
+ */
+export const ListSection = ({ id, title, description, videos }: ListSectionProps) => {
     const t = useTranslations('ListSection');
     const locale = useLocale() as Locale;
-    const [videos, setVideos] = useState<Video[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    // Un booleano y no el texto ya traducido: así el efecto no depende de `t` y
-    // el mensaje se resuelve en el render, con el idioma vigente.
-    const [hasError, setHasError] = useState(false);
-
-    useEffect(() => {
-        let cancelled = false;
-
-        const load = async () => {
-            setIsLoading(true);
-            try {
-                const data = await fetchVideos(id);
-                // Solo los 3 primeros vídeos (los más recientes)
-                if (!cancelled) setVideos(data.slice(0, 3));
-            } catch (err) {
-                console.error(`Error cargando videos para ${id}:`, err);
-                if (!cancelled) setHasError(true);
-            } finally {
-                if (!cancelled) setIsLoading(false);
-            }
-        };
-
-        load();
-
-        return () => {
-            cancelled = true;
-        };
-    }, [id]);
 
     return (
         <article className="list-section">
@@ -61,28 +36,22 @@ export const ListSection = memo(function ListSection({
             </header>
 
             <div id={`section-${id}`} className="list-section__container">
-                {isLoading ? (
-                    <div className="text-center p-4">{t('loading')}</div>
-                ) : hasError ? (
-                    <div className="text-center text-red-500 p-4">{t('error')}</div>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 xl:gap-12 ">
-                        {videos.map((video, index) => (
-                            <div
-                                key={video.videoId}
-                                data-reveal="fade-up"
-                                style={
-                                    {
-                                        '--stagger': index,
-                                        '--reveal-duration': '0.6s',
-                                    } as React.CSSProperties
-                                }
-                            >
-                                <VideoCard video={video} size="big" />
-                            </div>
-                        ))}
-                    </div>
-                )}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 xl:gap-12 ">
+                    {videos.map((video, index) => (
+                        <div
+                            key={video.videoId}
+                            data-reveal="fade-up"
+                            style={
+                                {
+                                    '--stagger': index,
+                                    '--reveal-duration': '0.6s',
+                                } as React.CSSProperties
+                            }
+                        >
+                            <VideoCard video={video} size="big" />
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div className="list-section__footer">
@@ -98,4 +67,4 @@ export const ListSection = memo(function ListSection({
             </div>
         </article>
     );
-});
+};

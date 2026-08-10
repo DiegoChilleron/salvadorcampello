@@ -5,7 +5,6 @@ import type { AbstractIntlMessages } from 'next-intl';
  * servidor, así que no hace falta serializarlo dentro del HTML de cada página.
  *
  * - `Navbar`        → components/Navbar/Navbar.tsx
- * - `ListSection`   → components/PortfolioMultimedia/Home/ListSection.tsx
  * - `PortfolioPage` → los dos componentes de /portfolio/
  * - `VideoCard`     → components/PortfolioMultimedia/VideoCard.tsx
  * - `DialogYoutube` → components/PortfolioMultimedia/DialogYoutube.tsx
@@ -23,7 +22,6 @@ import type { AbstractIntlMessages } from 'next-intl';
  */
 export const CLIENT_NAMESPACES = [
     'Navbar',
-    'ListSection',
     'PortfolioPage',
     'VideoCard',
     'DialogYoutube',

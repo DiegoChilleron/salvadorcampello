@@ -11,7 +11,7 @@ import type { Locale } from '@/i18n/routing';
 import { ListSectionAllVideos } from './ListSectionAllVideos';
 import { DialogYoutube } from '../DialogYoutube';
 import { CATEGORY_IDS, type CategoryId } from '../categories';
-import type { CardSize } from '../VideoCard';
+import type { CardSize, Video } from '../VideoCard';
 
 import icon_small from '@/img/icons/icon_small.svg';
 import icon_medium from '@/img/icons/icon_medium.svg';
@@ -25,7 +25,14 @@ const SIZE_ICONS: Record<CardSize, typeof icon_big> = {
     small: icon_small,
 };
 
-export const PortfolioMultimediaAllVideos = () => {
+interface PortfolioMultimediaAllVideosProps {
+    /** Listados recortados que la page resuelve en build con `getInitialVideos()`. */
+    initialVideos: Record<CategoryId, Video[]>;
+}
+
+export const PortfolioMultimediaAllVideos = ({
+    initialVideos,
+}: PortfolioMultimediaAllVideosProps) => {
     const t = useTranslations('PortfolioPage');
     const locale = useLocale() as Locale;
     const [activeSection, setActiveSection] = useState<CategoryId>('telenit');
@@ -180,12 +187,26 @@ export const PortfolioMultimediaAllVideos = () => {
                 </div>
             </div>
 
-            <ListSectionAllVideos
-                key={activeSection}
-                category={activeSection}
-                cardSize={cardSize}
-                searchTerm={debouncedSearchTerm}
-            />
+            {/* Las tres categorías se renderizan siempre y se oculta la que no toca, en
+                vez de montar solo la activa. Con una sola, el HTML exportado únicamente
+                contenía telenit: entrevistas y eventos —que son el contenido
+                distintivo, con nombres propios en los títulos— no llegaban a existir
+                para un rastreador. Es el patrón de pestañas de toda la vida: el
+                contenido está en el DOM y lo alterna el usuario.
+
+                `hidden` y no desmontar: así cada pestaña conserva su paginación y su
+                búsqueda al volver a ella. */}
+            {CATEGORY_IDS.map((category) => (
+                <div key={category} hidden={category !== activeSection}>
+                    <ListSectionAllVideos
+                        category={category}
+                        cardSize={cardSize}
+                        searchTerm={debouncedSearchTerm}
+                        initialVideos={initialVideos[category]}
+                        isActive={category === activeSection}
+                    />
+                </div>
+            ))}
 
             {/* Botón flotante para volver arriba */}
             {showScrollButton && (

@@ -1,18 +1,58 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { SITE_NAME, SITE_URL } from './site';
-import { generateAlternates } from './canonicals';
-import type { RouteKey } from './routes';
-import type { Locale } from '@/i18n/routing';
+import { OG_LOCALES, SITE_NAME, SITE_URL, TWITTER_HANDLE } from './site';
+import { absoluteUrl, generateAlternates } from './canonicals';
+import { routeLocales, type RouteKey } from './routes';
+import { routing, type Locale } from '@/i18n/routing';
 
 /**
- * Metadatos compartidos por los cuatro layouts de idioma.
+ * Bloque Open Graph completo.
  *
- * Sin `openGraph.images` ni `twitter.images` a propósito: las rellena el convenio de
- * fichero `opengraph-image.tsx` de cada ruta (ver src/lib/og.tsx). Declararlas aquí
- * tendría prioridad sobre el convenio y todas las páginas volverían a compartir imagen.
+ * Se construye entero en cada nivel a propósito. Next **sustituye** `openGraph` cuando
+ * una página lo declara, no lo fusiona con el del layout: al declarar aquí solo la
+ * descripción, las páginas de portfolio y las legales se quedaban sin `og:url`,
+ * `og:type`, `og:site_name` ni `og:locale`.
+ *
+ * `title` y `description` se dejan fuera cuando no se pasan: Next los resuelve desde el
+ * `title` (con su plantilla ya aplicada) y el `description` del propio objeto Metadata.
+ *
+ * Sin `images` a propósito: las rellena el convenio de fichero `opengraph-image.tsx` de
+ * cada ruta (ver src/lib/og.tsx). Declararlas aquí tendría prioridad sobre el convenio y
+ * todas las páginas volverían a compartir imagen.
  */
+function buildOpenGraph({
+    locale,
+    url,
+    alternateLocales,
+    description,
+}: {
+    locale: Locale;
+    url: string;
+    alternateLocales: readonly Locale[];
+    description?: string;
+}): Metadata['openGraph'] {
+    return {
+        type: 'website',
+        siteName: SITE_NAME,
+        url,
+        locale: OG_LOCALES[locale],
+        alternateLocale: alternateLocales.map((l) => OG_LOCALES[l]),
+        ...(description ? { description } : {}),
+    };
+}
+
+/** Bloque Twitter completo, por el mismo motivo de sustitución que `buildOpenGraph`. */
+function buildTwitter(description?: string): Metadata['twitter'] {
+    return {
+        card: 'summary_large_image',
+        site: TWITTER_HANDLE,
+        creator: TWITTER_HANDLE,
+        ...(description ? { description } : {}),
+    };
+}
+
+/** Metadatos compartidos por los cuatro layouts de idioma. */
 export async function buildLayoutMetadata(locale: Locale): Promise<Metadata> {
     const t = await getTranslations({ locale, namespace: 'Metadata' });
 
@@ -35,19 +75,14 @@ export async function buildLayoutMetadata(locale: Locale): Promise<Metadata> {
             ],
             apple: '/assets/icons/apple-touch-icon.png',
         },
-        openGraph: {
-            type: 'website',
-            siteName: SITE_NAME,
-            title: SITE_NAME,
-            description: t('shortDescription'),
-            url: SITE_URL,
+        // La home de este idioma, no `SITE_URL`: con la constante, /en/, /ca/ e /it/
+        // declaraban la home española mientras su canonical apuntaba a la suya.
+        openGraph: buildOpenGraph({
             locale,
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: SITE_NAME,
-            description: t('shortDescription'),
-        },
+            url: absoluteUrl('home', locale),
+            alternateLocales: routing.locales.filter((l) => l !== locale),
+        }),
+        twitter: buildTwitter(),
     };
 }
 
@@ -68,8 +103,17 @@ export function buildPageMetadata({
 }): Metadata {
     return {
         ...(title ? { title } : {}),
-        ...(description ? { description, openGraph: { description }, twitter: { description } } : {}),
+        ...(description ? { description } : {}),
         ...(noindex ? { robots: { index: false, follow: true } } : {}),
         alternates: generateAlternates(key, locale),
+        // `routeLocales` y no la lista entera de idiomas: las páginas legales solo
+        // existen en castellano, así que no tienen ningún `alternateLocale` que anunciar.
+        openGraph: buildOpenGraph({
+            locale,
+            url: absoluteUrl(key, locale),
+            alternateLocales: routeLocales(key).filter((l) => l !== locale),
+            description,
+        }),
+        twitter: buildTwitter(description),
     };
 }
