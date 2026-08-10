@@ -23,6 +23,13 @@ interface ListSectionAllVideosProps {
     isActive: boolean;
 }
 
+/**
+ * Tarjetas que se cargan con prioridad. Tres es una fila completa en la rejilla de
+ * escritorio; en móvil, que va a una columna, sobran dos miniaturas de ~12 KB, un precio
+ * razonable por no adivinar el ancho en el servidor.
+ */
+const PRIORITY_CARDS = 3;
+
 const PAGINATION_CONFIG = {
     big: { itemsPerPage: 24, loadMoreIncrement: 12 },
     medium: { itemsPerPage: 40, loadMoreIncrement: 20 },
@@ -194,8 +201,15 @@ export const ListSectionAllVideos = memo(function ListSectionAllVideos({
         >
             {displayedVideos.length > 0 ? (
                 <>
-                    {displayedVideos.map((video) => (
-                        <VideoCard key={video.videoId} video={video} size={cardSize} />
+                    {displayedVideos.map((video, index) => (
+                        <VideoCard
+                            key={video.videoId}
+                            video={video}
+                            size={cardSize}
+                            // Solo en la pestaña visible: las ocultas van con `hidden`, así
+                            // que priorizar sus miniaturas descargaría imágenes que nadie ve.
+                            priority={isActive && index < PRIORITY_CARDS}
+                        />
                     ))}
 
                     {/* Trigger para carga automática y botón manual */}

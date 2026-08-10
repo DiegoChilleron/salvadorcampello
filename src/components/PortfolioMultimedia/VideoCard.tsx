@@ -25,6 +25,19 @@ export type CardSize = 'big' | 'medium' | 'small';
 interface VideoCardProps {
     video: Video;
     size?: CardSize;
+    /**
+     * Candidata a LCP: la miniatura se pinta ya en el HTML del servidor, sin diferirla
+     * por IntersectionObserver, sin `loading="lazy"` y con `fetchpriority="high"`.
+     *
+     * PageSpeed lo marcaba en /portfolio/ («Los recursos de LCP no deben usar
+     * loading=lazy», «Se debe aplicar fetchpriority=high»): la primera tarjeta es el
+     * elemento LCP de la página y su `src` real no aparecía hasta después de hidratar,
+     * así que el navegador no podía ni empezar a descargarla mientras parseaba el HTML.
+     *
+     * Solo para las tarjetas de la mitad superior. En el resto la carga diferida sigue
+     * siendo lo correcto: son cientos.
+     */
+    priority?: boolean;
 }
 
 const PLACEHOLDER =
@@ -66,10 +79,18 @@ const SIZE_VARIANTS = {
     },
 };
 
-export const VideoCard = memo(function VideoCard({ video, size = 'medium' }: VideoCardProps) {
+export const VideoCard = memo(function VideoCard({
+    video,
+    size = 'medium',
+    priority = false,
+}: VideoCardProps) {
     const t = useTranslations('VideoCard');
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [isInView, setIsInView] = useState(false);
+    // Las prioritarias arrancan ya «cargadas» y «en vista»: el `src` real entra en el
+    // HTML del servidor y la tarjeta se pinta opaca desde el principio. Con la
+    // transición de opacidad, el LCP no se cuenta hasta que termina el fundido, que es
+    // justo lo que se quiere evitar en la imagen que lo define.
+    const [isLoaded, setIsLoaded] = useState(priority);
+    const [isInView, setIsInView] = useState(priority);
 
     const handleEnter = useCallback(() => setIsInView(true), []);
     const imgRef = useInViewOnce<HTMLImageElement>(handleEnter);
@@ -132,7 +153,8 @@ export const VideoCard = memo(function VideoCard({ video, size = 'medium' }: Vid
                     src={imageUrl}
                     alt={video.title}
                     className={`videocard-image ${roundedTopClasses} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                    loading="lazy"
+                    loading={priority ? 'eager' : 'lazy'}
+                    fetchPriority={priority ? 'high' : undefined}
                     onLoad={handleImageLoad}
                     onError={handleImageLoad}
                 />

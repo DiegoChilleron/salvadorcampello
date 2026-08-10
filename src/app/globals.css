@@ -326,6 +326,23 @@ footer .contact__rrss img {
            bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600
            transform transition-transform duration-200 hover:scale-105;
     content-visibility: auto;
+
+    /* Obligatorio junto a `content-visibility: auto`, no un ajuste fino. Sin esto la
+       tarjeta fuera de pantalla colapsa a 6 px (solo borde y padding), y de ahí salen
+       dos fallos encadenados:
+
+       - El observer de RevealOnScroll pide `threshold: 0.1`, que un elemento de 6 px
+         dentro de un envoltorio colapsado no alcanza: la tarjeta nunca recibe
+         `is-visible` y se queda en `opacity: 0` para siempre.
+       - La miniatura vive en un subárbol omitido, así que no tiene caja y su
+         IntersectionObserver tampoco puede dispararse: el `src` se queda en el
+         placeholder.
+
+       Medido en la home a 390 px: 3 de 9 tarjetas invisibles y sin miniatura.
+
+       `auto` usa el tamaño real ya renderizado y solo cae a los 240 px la primera vez,
+       así que la reserva se autocorrige en cuanto la tarjeta se pinta una vez. */
+    contain-intrinsic-size: auto 240px;
 }
 
 /* `outline` en vez de `ring` porque se dibuja por fuera del borde y no lo tapa

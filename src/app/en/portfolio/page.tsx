@@ -30,6 +30,12 @@ export default async function EnPortfolio() {
 
     return (
         <main>
+            {/* La miniatura de la primera tarjeta es el elemento LCP de esta página y
+                vive en un origen ajeno, así que antes de poder pedirla hay que resolver
+                DNS y negociar TLS con i.ytimg.com. El preconnect adelanta ese coste al
+                parseo del HTML, en paralelo con el resto de la carga.
+                React 19 lo iza al <head> aunque se declare aquí. */}
+            <link rel="preconnect" href="https://i.ytimg.com" />
             <BreadcrumbSchema
                 locale="en"
                 items={[
