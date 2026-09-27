@@ -13,25 +13,25 @@ export const PrivacityPolicy = () => {
             <div>
                 <h2>Recopilación de Información</h2>
                 <p>Recopilamos información personal a través del formulario de contacto disponible en nuestro sitio web. La información que recopilamos incluye:</p>
-                <p><ul>
+                <ul className="ps-2">
                     <li><strong>Nombre:</strong> Para identificarlo y dirigirnos a usted de manera adecuada.</li>
                     <li><strong>Correo electrónico:</strong> Para poder responder a sus consultas o comentarios.</li>
                     <li><strong>Mensaje:</strong> Cualquier información adicional que usted desee compartir con nosotros.</li>
-                </ul></p>
+                </ul>
                 <p>La recopilación de esta información se realiza únicamente con su consentimiento explícito, que se solicita al enviar el formulario de contacto.</p>
             </div>
             <div>
                 <h2>Uso de Información</h2>
                 <p>La información que recopilamos a través del formulario de contacto se utiliza únicamente para los siguientes fines:</p>
-                <p><ul>
+                <ul className="ps-2">
                     <li>Responder a sus consultas, comentarios o solicitudes de información.</li>
                     <li>Comunicarnos con usted en relación a sus mensajes.</li>
-                </ul></p>
+                </ul>
                 <p>No compartimos su información personal con terceros, excepto en los siguientes casos:</p>
-                <p><ul>
+                <ul className="ps-2">
                     <li>Si es requerido por ley.</li>
                     <li>Si usted nos da su consentimiento explícito para hacerlo.</li>
-                </ul></p>
+                </ul>
                 <p>La base legal para el tratamiento de sus datos es su consentimiento explícito, así como nuestro interés legítimo en responder a sus solicitudes.</p>
             </div>
             <div>
@@ -54,14 +54,14 @@ export const PrivacityPolicy = () => {
             <div>
                 <h2>Derechos del Usuario</h2>
                 <p>De acuerdo con el RGPD, usted tiene los siguientes derechos en relación con su información personal:</p>
-                <p><ul>
+                <ul className="ps-2">
                     <li><strong>Acceso:</strong> Puede solicitar acceso a los datos personales que tenemos sobre usted.</li>
                     <li><strong>Rectificación:</strong> Puede solicitar la corrección de datos inexactos o incompletos.</li>
                     <li><strong>Supresión:</strong> Puede solicitar la eliminación de sus datos personales cuando ya no sean necesarios para los fines para los que fueron recopilados.</li>
                     <li><strong>Limitación del tratamiento:</strong> Puede solicitar que limitemos el tratamiento de sus datos en ciertas circunstancias.</li>
                     <li><strong>Portabilidad:</strong> Puede solicitar que le proporcionemos sus datos en un formato estructurado, de uso común y lectura mecánica.</li>
                     <li><strong>Oposición:</strong> Puede oponerse al tratamiento de sus datos personales en determinadas situaciones.</li>
-                </ul></p>
+                </ul>
                 <p>Si desea ejercer estos derechos, puede contactarnos a través del correo electrónico <a href="mailto:contacto@salvadorcampello.com">contacto@salvadorcampello.com</a>.</p>
             </div>
             <div>

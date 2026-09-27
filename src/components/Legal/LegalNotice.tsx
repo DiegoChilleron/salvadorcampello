@@ -8,11 +8,11 @@ export const LegalNotice = () => {
             <div>
                 <h2>Titularidad del Sitio Web</h2>
                 <p>En cumplimiento con la Ley de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI) y demás normativa aplicable, se informa a los usuarios del sitio web <a href="https://salvadorcampello.com">https://salvadorcampello.com</a> que los datos del titular son los siguientes:</p>
-                <p><ul>
+                <ul className="ps-2">
                     <li><strong>Titular:</strong> Salvador Campello</li>
                     <li><strong>Domicilio:</strong> Elche (Alicante), España</li>
                     <li><strong>Correo electrónico:</strong> <a href="mailto:contacto@salvadorcampello.com">contacto@salvadorcampello.com</a></li>
-                </ul></p>
+                </ul>
             </div>
             <div>
                 <h2>Propiedad Intelectual</h2>
