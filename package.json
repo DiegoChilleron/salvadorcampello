@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "node scripts/generate-llms.mjs",
-    "build": "next build && node scripts/check-i18n.mjs",
+    "build": "next build && node scripts/check-i18n.mjs && node scripts/check-headers.mjs",
     "start": "next start",
     "lint": "eslint .",
     "check:i18n": "node scripts/check-i18n.mjs",
-    "llms": "node scripts/generate-llms.mjs"
+    "llms": "node scripts/generate-llms.mjs",
+    "check:headers": "node scripts/check-headers.mjs"
   },
   "dependencies": {
     "next": "^16.3.5",

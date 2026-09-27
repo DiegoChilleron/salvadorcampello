@@ -1,12 +1,12 @@
 'use client';
 
 import { memo, useState, useMemo, useCallback } from 'react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { useInViewOnce } from '@/hooks/useInViewOnce';
 import { openDialog } from './DialogYoutube';
 import youtubeIcon from '@/img/icons/rrss/youtube-icon.svg';
+import { StaticImg } from '@/components/UI/StaticImg';
 
 export interface Video {
     videoId: string;
@@ -142,16 +142,17 @@ export const VideoCard = memo(function VideoCard({
         >
             <div className="relative pb-[55%]">
                 <div className="youtube-icon">
-                    <Image src={youtubeIcon} alt="YouTube" className={iconClasses} />
+                    <StaticImg src={youtubeIcon} alt="YouTube" className={iconClasses} />
                 </div>
 
                 {/* Miniatura remota diferida por IntersectionObserver: se usa <img>
                     porque el src cambia de placeholder a URL de i.ytimg.com. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     ref={imgRef}
                     src={imageUrl}
-                    alt={video.title}
+                    // Decorativa: el título ya está en el texto de la tarjeta y en el
+                    // aria-label del botón; repetirlo en el alt se leía dos veces.
+                    alt=""
                     className={`videocard-image ${roundedTopClasses} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                     loading={priority ? 'eager' : 'lazy'}
                     fetchPriority={priority ? 'high' : undefined}

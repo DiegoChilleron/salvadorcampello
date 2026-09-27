@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { preload } from 'react-dom';
 
 import background from '@/img/photos/hero/background.webp';
 import backgroundMobile from '@/img/photos/hero/background_mobile.webp';
@@ -12,6 +13,7 @@ import table from '@/img/photos/hero/table.webp';
 import tableMobile from '@/img/photos/hero/table_mobile.webp';
 
 const MOBILE_BREAKPOINT = '(max-width: 412px)';
+const DESKTOP_BREAKPOINT = '(min-width: 413px)';
 
 /**
  * Server Component: la coreografía de las cinco capas vive entera en CSS, en la sección
@@ -23,18 +25,19 @@ const MOBILE_BREAKPOINT = '(max-width: 412px)';
  * `children` recibe <Description /> desde la page.
  */
 export const Hero = ({ children }: { children: ReactNode }) => {
+    // Art direction: el navegador elige la variante antes de que corra el JS. Con
+    // `preload()` cada imagen se anuncia una sola vez (los `<link>` en JSX salían dos veces
+    // en el <head>) y con `fetchPriority: 'high'`, como sus `<img>`: PageSpeed marcaba que
+    // el preload de la imagen LCP (la persona en móvil) no lo llevaba.
+    for (const href of [personMobile.src, camera_01Mobile.src, tableMobile.src, backgroundMobile.src]) {
+        preload(href, { as: 'image', media: MOBILE_BREAKPOINT, fetchPriority: 'high' });
+    }
+    for (const href of [person.src, camera_01.src, table.src, background.src]) {
+        preload(href, { as: 'image', media: DESKTOP_BREAKPOINT, fetchPriority: 'high' });
+    }
+
     return (
         <div className="bg-darkprimary">
-            {/* Art direction: el navegador elige la variante antes de que corra el JS. */}
-            <link rel="preload" as="image" href={personMobile.src} media={MOBILE_BREAKPOINT} />
-            <link rel="preload" as="image" href={camera_01Mobile.src} media={MOBILE_BREAKPOINT} />
-            <link rel="preload" as="image" href={tableMobile.src} media={MOBILE_BREAKPOINT} />
-            <link rel="preload" as="image" href={backgroundMobile.src} media={MOBILE_BREAKPOINT} />
-            <link rel="preload" as="image" href={person.src} media="(min-width: 413px)" />
-            <link rel="preload" as="image" href={camera_01.src} media="(min-width: 413px)" />
-            <link rel="preload" as="image" href={table.src} media="(min-width: 413px)" />
-            <link rel="preload" as="image" href={background.src} media="(min-width: 413px)" />
-
             <div id="inicio" className="hero">
                 <h1 className="hero__h1-title">SALVADOR CAMPELLO</h1>
 

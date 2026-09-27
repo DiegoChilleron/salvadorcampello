@@ -1,13 +1,101 @@
-# Cabeceras para CloudFlare Pages.
+# Cabeceras para Cloudflare Pages.
 
-# next/og escribe las imágenes Open Graph SIN extensión
-# (p. ej. /portfolio/opengraph-image-1a2b3c), así que se sirven como
-# application/octet-stream y los scrapers de WhatsApp, X, Facebook y LinkedIn las
-# descartan: la tarjeta sale sin imagen. Aquí se les fija su tipo real.
-# El comodín cubre las cuatro formas que genera el build: con hash y sin él, a uno y
-# a dos niveles de profundidad (/opengraph-image-35z9gd, /en/opengraph-image,
-# /portfolio/opengraph-image-dmsve, /en/portfolio/opengraph-image).
-/*opengraph-image*
+# next/og escribe las imágenes Open Graph SIN extensión (p. ej. /portfolio/opengraph-image-dmsve),
+# así que Pages las sirve como application/octet-stream y los scrapers de WhatsApp, X, Facebook
+# y LinkedIn las descartan: la tarjeta sale sin imagen. Aquí se les fija su tipo real.
+#
+# Una regla por carpeta y forma, sin patrones con dos comodines: `/*opengraph-image*` no casaba
+# con nada (Pages solo admite un comodín por regla) y las 11 imágenes salían sin tipo. El build
+# genera dos formas: con hash en el árbol de español (`/opengraph-image-35z9gd`) y sin hash en
+# en/ca/it (`/en/opengraph-image`). Cada carpeta lleva las dos —la exacta y la de `-*`, que no
+# se solapan— para no depender de cuál toque en cada build.
+# Al añadir una página con su opengraph-image.tsx, añadir aquí su par de reglas.
+
+/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/en/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/en/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/ca/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/ca/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/it/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/it/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/portfolio/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/portfolio/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/en/portfolio/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/en/portfolio/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/ca/portfolio/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/ca/portfolio/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/it/portfolio/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/it/portfolio/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/aviso-legal/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/aviso-legal/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/politica-de-privacidad/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/politica-de-privacidad/opengraph-image-*
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/politica-de-cookies/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=2592000
+
+/politica-de-cookies/opengraph-image-*
   Content-Type: image/png
   Cache-Control: public, max-age=2592000
 

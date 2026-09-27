@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 
-import { PrivacityPolicy } from '@/components';
+import { PrivacityPolicy } from '@/components/Legal/PrivacityPolicy';
 import { buildPageMetadata } from '@/config/metadata';
 import { BreadcrumbSchema } from '@/components/UI/SEO/BreadcrumbSchema';
 

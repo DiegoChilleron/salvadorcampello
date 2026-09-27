@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import MailIcon from '@/img/icons/mail_icon.svg';
 import { CONTACT_EMAIL } from '@/config/site';
+import { StaticImg } from '@/components/UI/StaticImg';
 
 export const ContactMethod = () => {
     const t = useTranslations('SocialNetworks');
@@ -11,7 +11,7 @@ export const ContactMethod = () => {
         <article>
             <div className="contact__method">
                 <a href={`mailto:${CONTACT_EMAIL}`}>
-                    <Image
+                    <StaticImg
                         src={MailIcon}
                         alt="Correo"
                         title={`Enviar correo a ${CONTACT_EMAIL}`}

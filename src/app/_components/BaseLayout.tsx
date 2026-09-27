@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 
-import { Navbar, Footer } from '@/components';
+import { Navbar } from '@/components/Navbar/Navbar';
+import { Footer } from '@/components/Footer/Footer';
 import type { Locale } from '@/i18n/routing';
 import { CLIENT_NAMESPACES, pickMessages } from '@/i18n/clientMessages';
 import { openSans } from '@/app/fonts';

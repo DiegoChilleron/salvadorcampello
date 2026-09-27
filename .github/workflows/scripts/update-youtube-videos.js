@@ -61,9 +61,19 @@ function isDateInExcludedRange(title) {
 const FROZEN_CATEGORIES = new Set(['telenit', 'entrevistas']);
 const FREEZE_DATE = Date.UTC(2026, 1, 2); // 2026-02-02, inclusive
 
-/** Fecha del título (DD/MM/YY o DD/MM/YYYY al final) en ms UTC, o null si no la lleva. */
+/**
+ * Fecha del título (DD/MM/YY o DD/MM/YYYY al final) en ms UTC, o null si no la lleva.
+ *
+ * Acepta también espacio, punto o guion como separador y espacios sueltos alrededor
+ * (`TELENIT 14 08 26`, `… - 02/08 /2024`). Con solo barras, esos títulos no tenían fecha,
+ * no los paraba ni la congelación ni el parón de verano, y «TELENIT 14 08 26» se coló en
+ * un catálogo congelado desde febrero (era la primera tarjeta del portfolio).
+ * El mismo patrón que `parseTitleDate` en src/lib/videos.ts.
+ */
+const TITLE_DATE = /(\d{1,2})\s*[/.\- ]\s*(\d{1,2})\s*[/.\- ]\s*(\d{2,4})$/;
+
 function parseTitleDate(title) {
-  const match = title.match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+  const match = title.match(TITLE_DATE);
   if (!match) {
     return null;
   }

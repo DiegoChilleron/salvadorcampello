@@ -1,6 +1,8 @@
 'use client';
 
-import Image, { type StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
+
+import { StaticImg } from '@/components/UI/StaticImg';
 
 interface CardCVProps {
     title: string;
@@ -43,7 +45,7 @@ export const CardCV = ({
     const reveal = ['experience', 'language'].includes(cat) ? 'fade-right' : 'fade-left';
 
     const logo = img && (
-        <Image
+        <StaticImg
             src={img}
             alt={`Logotipo de ${title}`}
             className="w-8 h-auto mr-2"

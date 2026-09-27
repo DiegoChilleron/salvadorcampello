@@ -30,7 +30,7 @@ import type { Video } from '@/components/PortfolioMultimedia/VideoCard';
 /**
  * Cuántos vídeos de cada categoría se prerenderizan.
  *
- * Entrevistas (60) y eventos (41) caben enteras. Telenit son 1.712: meterlas todas
+ * Entrevistas (60) y eventos (41) caben enteras. Telenit son ~1.700: meterlas todas
  * multiplicaría por siete el peso del HTML para indexar titulares de informativo casi
  * idénticos entre sí, así que se corta en los más recientes. El resto sigue llegando por
  * `fetchVideos` al hidratar, de modo que la búsqueda y el «cargar más» siguen viendo el
@@ -116,8 +116,14 @@ export function getPreviewVideos(count: number): Record<CategoryId, Video[]> {
  * no es importable desde la app, y porque hasta que la Action vuelva a correr los JSON no
  * traen `publishedAt`: sin este parser no habría `uploadDate` para casi ningún vídeo.
  */
+/**
+ * Separadores admitidos: barra, espacio, punto o guion, con espacios sueltos alrededor
+ * (`TELENIT 14 08 26`, `… - 02/08 /2024`). El mismo patrón que la Action.
+ */
+const TITLE_DATE = /(\d{1,2})\s*[/.\- ]\s*(\d{1,2})\s*[/.\- ]\s*(\d{2,4})$/;
+
 export function parseTitleDate(title: string): string | null {
-    const match = title.trim().match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+    const match = title.trim().match(TITLE_DATE);
     if (!match) return null;
 
     const [, day, month, year] = match;

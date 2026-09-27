@@ -34,7 +34,9 @@ export const LanguageSelector = ({ label }: { label: string }) => {
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="text-xs bg-white/20 hover:bg-white/10 rounded-xl p-2 m-1 cursor-pointer flex items-center"
                 aria-expanded={isDropdownOpen}
-                aria-label={label}
+                // El nombre accesible empieza por el texto visible («Español, Cambiar idioma»):
+                // con solo `label`, quien usa control por voz dice «Español» y no le encuentra.
+                aria-label={`${localeNames[locale]}, ${label}`}
             >
                 {localeNames[locale]}
                 <HiChevronDown

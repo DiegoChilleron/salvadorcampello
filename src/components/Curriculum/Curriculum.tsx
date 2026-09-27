@@ -117,7 +117,12 @@ export const Curriculum = () => {
     ];
 
     return (
-        <section id="curriculum" className="px-6">
+        // overflow-x-clip: las tarjetas `fade-left` arrancan desplazadas 3rem a la derecha. Sin
+        // recortarlas, en móvil la página medía 436 px en un viewport de 412: al añadirse
+        // `js-reveal` el navegador ensanchaba el viewport y todo el hero se recolocaba
+        // (CLS 0,058 en PageSpeed) y además se podía arrastrar la página en horizontal.
+        // `clip` y no `hidden`, por lo mismo que en la galería (no crea contenedor de scroll).
+        <section id="curriculum" className="px-6 overflow-x-clip">
             <h2>{t('title')}</h2>
 
             <div className="curriculum__grid">

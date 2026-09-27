@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import { PortfolioMultimediaAllVideos } from '@/components';
+import { PortfolioMultimediaAllVideos } from '@/components/PortfolioMultimedia/Page/PortfolioMultimediaAllVideos';
 import { buildPageMetadata } from '@/config/metadata';
 import { BreadcrumbSchema } from '@/components/UI/SEO/BreadcrumbSchema';
 import { VideoListSchema } from '@/components/UI/SEO/VideoListSchema';

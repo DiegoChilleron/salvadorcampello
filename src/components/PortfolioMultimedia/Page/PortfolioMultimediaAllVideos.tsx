@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { HiArrowUp, HiMagnifyingGlass } from 'react-icons/hi2';
 
 import { Link } from '@/i18n/navigation';
+import { StaticImg } from '@/components/UI/StaticImg';
 import { routePath } from '@/config/routes';
 import type { Locale } from '@/i18n/routing';
 import { ListSectionAllVideos } from './ListSectionAllVideos';
@@ -135,7 +135,7 @@ export const PortfolioMultimediaAllVideos = ({
                             aria-label={t('backbutton')}
                             title={t('backbutton')}
                         >
-                            <Image
+                            <StaticImg
                                 src={back_arrow_icon}
                                 alt={t('backbutton')}
                                 className="w-5 h-5 group-hover:invert dark:invert"
@@ -153,7 +153,7 @@ export const PortfolioMultimediaAllVideos = ({
                                 aria-label={t('sizetoggle')}
                                 title={t('sizetoggle')}
                             >
-                                <Image
+                                <StaticImg
                                     src={SIZE_ICONS[cardSize]}
                                     alt={t(`size.${cardSize}`)}
                                     className="w-5 h-5 group-hover:invert dark:invert"

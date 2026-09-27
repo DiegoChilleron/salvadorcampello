@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 
-import { Page404 } from '@/components';
+import { Page404 } from '@/components/Page404/Page404';
 import { IntlProvider } from '@/app/_components/IntlProvider';
 import { pickMessages } from '@/i18n/clientMessages';
 import { routing } from '@/i18n/routing';
